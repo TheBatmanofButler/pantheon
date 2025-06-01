@@ -1,4 +1,5 @@
 import argparse
+import torch
 
 import pantheon.gpt2.core.model as model
 import pantheon.gpt2.core.tokenize as tokenize
@@ -9,7 +10,9 @@ import pantheon.gpt2.core.device as device
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("-p", "--prompt", help="Prompt to pass into the model")
+    parser.add_argument(
+        "-f", "--filepath", help="Filepath for trained model state dictionary"
+    )
     args = parser.parse_args()
 
     gpt2 = model.GPT2(len(tokenize.tokenizer)).to(device.device)
@@ -20,3 +23,5 @@ if __name__ == "__main__":
         epochs=config.epochs,
     )
     trainer.train()
+
+    torch.save(gpt2.state_dict(), args.filepath)

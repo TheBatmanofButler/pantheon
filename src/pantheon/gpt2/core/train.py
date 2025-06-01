@@ -1,12 +1,14 @@
 import datasets
-import torch.utils.data
 import numpy as np
+import torch.optim
+import torch.utils.data
 import transformer_lens.utils
+import wandb
 
 import pantheon.gpt2.core.config as config
-import pantheon.gpt2.core.tokenize as tokenize
-import pantheon.gpt2.core.sample as sample
 import pantheon.gpt2.core.device as device
+import pantheon.gpt2.core.sample as sample
+import pantheon.gpt2.core.tokenize as tokenize
 
 
 class Trainer:
@@ -18,7 +20,7 @@ class Trainer:
         self.sampler = sample.Sampler(self.model)
         self.optimizer = torch.optim.AdamW(self.model.parameters())
 
-        dataset = datasets.load_dataset("roneneldan/TinyStories", split="train")
+        dataset = datasets.load_dataset(config.dataset, split="train")
         tokenized_dataset = transformer_lens.utils.tokenize_and_concatenate(
             dataset,
             tokenize.tokenizer,
@@ -33,16 +35,36 @@ class Trainer:
             dataset_dict["train"],
             batch_size=self.batch_size,
             shuffle=True,
+            pin_memory=True,
         )
         self.test_loader = torch.utils.data.DataLoader(
             dataset_dict["test"],
             batch_size=self.batch_size,
             shuffle=False,
+            pin_memory=True,
         )
 
         self.step = 0
+        self.run = None
 
     def train(self):
+        self.run = wandb.init(
+            # Set the wandb entity where your project will be logged (generally your team name).
+            entity="the-ganesh-ravichandran-none",
+            # Set the wandb project where this run will be logged.
+            project="embed-unembed",
+            # Track hyperparameters and run metadata.
+            config={
+                "batch_size": 4,
+                "context_window": 1024,
+                "d_model": 768,
+                "d_sequence": 1024,
+                "dataset": "roneneldan/TinyStories",
+                "epochs": 1,
+                "test_size": 1000,
+            },
+        )
+
         accuracy = np.nan
         for epoch in range(self.epochs):
             for i, batch in enumerate(self.train_loader):
@@ -54,6 +76,8 @@ class Trainer:
             accuracy = self.evaluate()
             sample_text = self.sampler.sample("Is mayonnaise an instrument?")
             print(sample_text)
+
+        self.run.finish()
 
     def evaluate(self):
         self.model.eval()
@@ -68,6 +92,7 @@ class Trainer:
             total_samples += tokens.size(0) * (tokens.size(1) - 1)
 
         accuracy = total_correct / total_samples
+        self.run.log({"accuracy": accuracy}, step=self.step)
 
         self.model.train()
 
@@ -84,6 +109,10 @@ class Trainer:
         self.optimizer.zero_grad()
 
         self.step += 1
+        self.run.log(
+            {"train_loss": loss},
+            step=self.step,
+        )
 
         return loss
 
