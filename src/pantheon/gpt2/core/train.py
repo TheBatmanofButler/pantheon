@@ -18,7 +18,11 @@ class Trainer:
         self.epochs = epochs
 
         self.sampler = sample.Sampler(self.model)
-        self.optimizer = torch.optim.AdamW(self.model.parameters())
+        self.optimizer = torch.optim.AdamW(
+            self.model.parameters(),
+            lr=config.learning_rate,
+            # weight_decay=config.weight_decay,
+        )
 
         dataset = datasets.load_dataset(config.dataset, split="train")
         tokenized_dataset = transformer_lens.utils.tokenize_and_concatenate(
@@ -52,15 +56,23 @@ class Trainer:
             # Set the wandb entity where your project will be logged (generally your team name).
             entity="the-ganesh-ravichandran-none",
             # Set the wandb project where this run will be logged.
-            project="embed-unembed",
+            project="gpt2",
             # Track hyperparameters and run metadata.
             config={
                 "batch_size": 4,
                 "context_window": 1024,
+                "d_head": 64,
+                "d_mlp": 3072,
                 "d_model": 768,
-                "d_sequence": 1024,
+                "d_sequence": 512,
+                "d_vocab": 50257,
                 "dataset": "roneneldan/TinyStories",
-                "epochs": 1,
+                "epochs": 10,
+                "initialized_std_range": 0.02,
+                "layer_norm_epsilon": 1e-5,
+                "num_blocks": 12,
+                "num_heads": 12,
+                "max_batches_per_epoch": 500,
                 "test_size": 1000,
             },
         )
@@ -73,8 +85,12 @@ class Trainer:
                     f"Epoch {epoch + 1}, Batch {i + 1}, loss: {loss:.3f}, accuracy: {accuracy:.3f}"
                 )
 
+                if i > config.max_batches_per_epoch:
+                    break
+
             accuracy = self.evaluate()
             sample_text = self.sampler.sample("Is mayonnaise an instrument?")
+            print("\n")
             print(sample_text)
 
         self.run.finish()

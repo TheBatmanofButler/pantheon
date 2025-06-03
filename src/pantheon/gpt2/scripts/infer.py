@@ -15,7 +15,7 @@ if __name__ == "__main__":
     parser.add_argument("-p", "--prompt", help="Prompt for GPT-2")
     args = parser.parse_args()
 
-    gpt2 = model.GPT2(len(tokenize.tokenizer)).to(device.device)
+    gpt2 = model.GPT2(tokenize.d_vocab).to(device.device)
     gpt2.load_state_dict(torch.load(args.filepath, weights_only=True))
     gpt2.eval()
 

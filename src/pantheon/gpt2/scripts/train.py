@@ -2,7 +2,6 @@ import argparse
 import torch
 
 import pantheon.gpt2.core.model as model
-import pantheon.gpt2.core.tokenize as tokenize
 import pantheon.gpt2.core.train as train
 import pantheon.gpt2.core.config as config
 import pantheon.gpt2.core.device as device
@@ -15,7 +14,7 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    gpt2 = model.GPT2(len(tokenize.tokenizer)).to(device.device)
+    gpt2 = model.GPT2().to(device.device)
 
     trainer = train.Trainer(
         model=gpt2,
