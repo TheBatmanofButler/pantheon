@@ -11,16 +11,16 @@ class Attention(nn.Module):
         super().__init__()
 
         self.W_Q = nn.Parameter(torch.empty((num_heads, d_model, d_head)))
-        nn.init.normal_(self.W_Q, std=config.initialized_std_range)
+        nn.init.normal_(self.W_Q, std=config.config["initialized_std_range"])
 
         self.W_K = nn.Parameter(torch.empty((num_heads, d_model, d_head)))
-        nn.init.normal_(self.W_K, std=config.initialized_std_range)
+        nn.init.normal_(self.W_K, std=config.config["initialized_std_range"])
 
         self.W_V = nn.Parameter(torch.empty((num_heads, d_model, d_head)))
-        nn.init.normal_(self.W_V, std=config.initialized_std_range)
+        nn.init.normal_(self.W_V, std=config.config["initialized_std_range"])
 
         self.W_output = nn.Parameter(torch.empty((num_heads, d_head, d_model)))
-        nn.init.normal_(self.W_output, std=config.initialized_std_range)
+        nn.init.normal_(self.W_output, std=config.config["initialized_std_range"])
 
         self.b_Q = nn.Parameter(torch.empty((num_heads, d_head)))
         self.b_K = nn.Parameter(torch.empty((num_heads, d_head)))

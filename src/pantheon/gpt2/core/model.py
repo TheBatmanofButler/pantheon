@@ -14,32 +14,32 @@ class GPT2(nn.Module):
         super().__init__()
 
         self.embed = embed.Embed(
-            d_vocab=config.d_vocab,
-            d_model=config.d_model,
+            d_vocab=config.config["d_vocab"],
+            d_model=config.config["d_model"],
         )
         self.positional_embed = positional.PositionalEmbed(
-            context_window=config.context_window,
-            d_model=config.d_model,
+            context_window=config.config["context_window"],
+            d_model=config.config["d_model"],
         )
 
         self.blocks = [
             transformer_block.TransformerBlock(
-                num_heads=config.num_heads,
-                d_model=config.d_model,
-                d_head=config.d_head,
-                d_vocab=config.d_vocab,
-                d_mlp=config.d_mlp,
-                layer_norm_epsilon=config.layer_norm_epsilon,
+                num_heads=config.config["num_heads"],
+                d_model=config.config["d_model"],
+                d_head=config.config["d_head"],
+                d_vocab=config.config["d_vocab"],
+                d_mlp=config.config["d_mlp"],
+                layer_norm_epsilon=config.config["layer_norm_epsilon"],
             ).to(device.device)
-            for _ in range(config.num_blocks)
+            for _ in range(config.config["num_blocks"])
         ]
         self.layer_norm_final = layer_norm.LayerNorm(
-            d_model=config.d_model,
-            layer_norm_epsilon=config.layer_norm_epsilon,
+            d_model=config.config["d_model"],
+            layer_norm_epsilon=config.config["layer_norm_epsilon"],
         )
         self.unembed = embed.Unembed(
-            d_model=config.d_model,
-            d_vocab=config.d_vocab,
+            d_model=config.config["d_model"],
+            d_vocab=config.config["d_vocab"],
         )
 
     def forward(self, tokens) -> torch.Tensor:

@@ -23,6 +23,6 @@ class LayerNorm(nn.Module):
         ).sqrt()
 
         residual = (residual - residual_mean) / residual_std
-        residual *= self.W + self.b
+        residual = residual * self.W + self.b
 
         return residual

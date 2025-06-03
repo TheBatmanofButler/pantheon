@@ -20,21 +20,23 @@ class Trainer:
         self.sampler = sample.Sampler(self.model)
         self.optimizer = torch.optim.AdamW(
             self.model.parameters(),
-            lr=config.learning_rate,
-            # weight_decay=config.weight_decay,
+            lr=config.config["learning_rate"],
+            weight_decay=config.config["weight_decay"],
         )
 
-        dataset = datasets.load_dataset(config.dataset, split="train")
+        dataset = datasets.load_dataset(config.config["dataset"], split="train")
         tokenized_dataset = transformer_lens.utils.tokenize_and_concatenate(
             dataset,
             tokenize.tokenizer,
             column_name="text",
-            max_length=config.d_sequence,
+            max_length=config.config["context_window"],
             add_bos_token=True,
             num_proc=4,
         )
 
-        dataset_dict = tokenized_dataset.train_test_split(test_size=config.test_size)
+        dataset_dict = tokenized_dataset.train_test_split(
+            test_size=config.config["test_size"]
+        )
         self.train_loader = torch.utils.data.DataLoader(
             dataset_dict["train"],
             batch_size=self.batch_size,
@@ -58,23 +60,7 @@ class Trainer:
             # Set the wandb project where this run will be logged.
             project="gpt2",
             # Track hyperparameters and run metadata.
-            config={
-                "batch_size": 4,
-                "context_window": 1024,
-                "d_head": 64,
-                "d_mlp": 3072,
-                "d_model": 768,
-                "d_sequence": 512,
-                "d_vocab": 50257,
-                "dataset": "roneneldan/TinyStories",
-                "epochs": 10,
-                "initialized_std_range": 0.02,
-                "layer_norm_epsilon": 1e-5,
-                "num_blocks": 12,
-                "num_heads": 12,
-                "max_batches_per_epoch": 500,
-                "test_size": 1000,
-            },
+            config=config.config,
         )
 
         accuracy = np.nan
@@ -85,8 +71,8 @@ class Trainer:
                     f"Epoch {epoch + 1}, Batch {i + 1}, loss: {loss:.3f}, accuracy: {accuracy:.3f}"
                 )
 
-                if i > config.max_batches_per_epoch:
-                    break
+                # if i > config.config["max_batches_per_epoch:
+                #     break
 
             accuracy = self.evaluate()
             sample_text = self.sampler.sample("Is mayonnaise an instrument?")
@@ -121,6 +107,7 @@ class Trainer:
         loss = -self.get_log_probs(logits, tokens).mean()
         loss.backward()
 
+        # torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)
         self.optimizer.step()
         self.optimizer.zero_grad()
 

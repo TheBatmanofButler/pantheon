@@ -10,7 +10,7 @@ class PositionalEmbed(nn.Module):
         super().__init__()
 
         self.W_positional = nn.Parameter(torch.empty((context_window, d_model)))
-        nn.init.normal_(self.W_positional, std=config.initialized_std_range)
+        nn.init.normal_(self.W_positional, std=config.config["initialized_std_range"])
 
     def forward(self, tokens):
         batch, sequence_length = tokens.shape

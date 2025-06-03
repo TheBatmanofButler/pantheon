@@ -12,7 +12,7 @@ class Embed(nn.Module):
         nn.init.normal_(
             tensor=self.W,
             mean=0.0,
-            std=config.initialized_std_range,
+            std=config.config["initialized_std_range"],
         )
 
     def forward(self, tokens):
@@ -27,7 +27,7 @@ class Unembed(nn.Module):
         nn.init.normal_(
             tensor=self.W,
             mean=0.0,
-            std=config.initialized_std_range,
+            std=config.config["initialized_std_range"],
         )
 
     def forward(self, tokens):

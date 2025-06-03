@@ -18,8 +18,8 @@ if __name__ == "__main__":
 
     trainer = train.Trainer(
         model=gpt2,
-        batch_size=config.batch_size,
-        epochs=config.epochs,
+        batch_size=config.config["batch_size"],
+        epochs=config.config["epochs"],
     )
     trainer.train()
 

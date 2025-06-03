@@ -12,13 +12,13 @@ class MLP(nn.Module):
         self.W_input = nn.Parameter(torch.empty(d_model, d_mlp))
         nn.init.normal_(
             self.W_input,
-            std=config.initialized_std_range,
+            std=config.config["initialized_std_range"],
         )
 
         self.W_output = nn.Parameter(torch.empty(d_mlp, d_model))
         nn.init.normal_(
             self.W_output,
-            std=config.initialized_std_range,
+            std=config.config["initialized_std_range"],
         )
 
         self.b_input = nn.Parameter(torch.zeros(d_mlp))

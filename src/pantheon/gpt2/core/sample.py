@@ -13,7 +13,7 @@ class Sampler:
         self.model = model
 
     def _prep_tokens_for_training(self, tokens):
-        tokens_within_context = tokens[-config.context_window :]
+        tokens_within_context = tokens[-config.config["context_window"] :]
         tokens_with_batch_dimension = tokens_within_context.unsqueeze(0)
 
         return tokens_with_batch_dimension
