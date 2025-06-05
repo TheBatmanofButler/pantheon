@@ -6,7 +6,7 @@ config = {
     "d_embedding": 256,
     "d_vocab": 50257,
     "dataset": "roneneldan/TinyStories",
-    "epochs": 1000,
+    "epochs": 3,
     "initialized_std_range": 0.02,
     "layer_norm_epsilon": 1e-5,
     "num_blocks": 4,
@@ -15,5 +15,5 @@ config = {
     "test_size": 1,
     "learning_rate": 3e-4,
     "weight_decay": 1e-4,
-    "limited_dataset_size": 64,
+    "limited_dataset_size": None,
 }
