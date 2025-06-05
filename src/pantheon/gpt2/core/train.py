@@ -12,10 +12,11 @@ import pantheon.gpt2.core.tokenize as tokenize
 
 
 class Trainer:
-    def __init__(self, model, num_sequences_per_batch, epochs):
+    def __init__(self, model, num_sequences_per_batch, epochs, save_fn=None):
         self.model = model
         self.num_sequences_per_batch = num_sequences_per_batch
         self.epochs = epochs
+        self.save_fn = save_fn
 
         self.sampler = sample.Sampler(self.model)
         self.optimizer = torch.optim.AdamW(
@@ -81,9 +82,13 @@ class Trainer:
                     break
 
             accuracy = self.evaluate()
-            sample_text = self.sampler.sample("Is mayonnaise an instrument?")
-            print("\n")
-            print(sample_text)
+            # sample_text = self.sampler.sample("Is mayonnaise an instrument?")
+            # print("\n")
+            # print(sample_text)
+
+            if self.save_fn:
+                print("Saving model params to disk.")
+                self.save_fn()
 
         self.run.finish()
 

@@ -20,7 +20,6 @@ if __name__ == "__main__":
         model=gpt2,
         num_sequences_per_batch=config.config["num_sequences_per_batch"],
         epochs=config.config["epochs"],
+        save_fn=lambda: torch.save(gpt2.state_dict(), args.filepath),
     )
     trainer.train()
-
-    torch.save(gpt2.state_dict(), args.filepath)

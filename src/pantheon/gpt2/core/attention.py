@@ -80,9 +80,6 @@ class Attention(nn.Module):
         scaled_attention_scores = attention_scores / (self.d_head**0.5)
         attention_scores_masked = self.apply_causal_mask(scaled_attention_scores)
 
-        noise = torch.randn_like(attention_scores_masked) * 0.01
-        attention_scores_masked = attention_scores_masked + noise
-
         attention_pattern = attention_scores_masked.softmax(-1)
 
         z = einops.einsum(
