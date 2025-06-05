@@ -8,6 +8,9 @@ class Attention(nn.Module):
     def __init__(self, num_heads, d_embedding, d_head, initialized_std_range):
         super().__init__()
 
+        # Necessary to keep Z norms low enough for convergence
+        std = initialized_std_range / (2 * num_heads) ** 0.5
+
         self.W_Q = nn.Parameter(torch.empty((num_heads, d_embedding, d_head)))
         self.W_K = nn.Parameter(torch.empty((num_heads, d_embedding, d_head)))
         self.W_V = nn.Parameter(torch.empty((num_heads, d_embedding, d_head)))
@@ -18,10 +21,22 @@ class Attention(nn.Module):
         self.b_V = nn.Parameter(torch.zeros((num_heads, d_head)))
         self.b_output = nn.Parameter(torch.zeros((d_embedding)))
 
-        nn.init.normal_(self.W_Q, std=initialized_std_range * d_head**0.5)
-        nn.init.normal_(self.W_K, std=initialized_std_range * d_head**0.5)
-        nn.init.normal_(self.W_V, std=initialized_std_range * d_head**0.5)
-        nn.init.normal_(self.W_output, std=initialized_std_range * d_head**0.5)
+        nn.init.normal_(
+            self.W_Q,
+            std=std,
+        )
+        nn.init.normal_(
+            self.W_K,
+            std=std,
+        )
+        nn.init.normal_(
+            self.W_V,
+            std=std,
+        )
+        nn.init.normal_(
+            self.W_output,
+            std=std,
+        )
 
         self.d_head = d_head
 
