@@ -3,11 +3,11 @@ import torch.nn as nn
 
 
 class LayerNorm(nn.Module):
-    def __init__(self, d_model, layer_norm_epsilon):
+    def __init__(self, d_embedding, layer_norm_epsilon):
         super().__init__()
 
-        self.W = nn.Parameter(torch.ones(d_model))
-        self.b = nn.Parameter(torch.zeros(d_model))
+        self.W = nn.Parameter(torch.ones(d_embedding))
+        self.b = nn.Parameter(torch.zeros(d_embedding))
 
         self.layer_norm_epsilon = layer_norm_epsilon
 

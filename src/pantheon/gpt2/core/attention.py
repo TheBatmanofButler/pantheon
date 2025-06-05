@@ -3,29 +3,25 @@ import torch
 import torch.nn as nn
 import pantheon.gpt2.core.device as device
 
-import pantheon.gpt2.core.config as config
-
 
 class Attention(nn.Module):
-    def __init__(self, num_heads, d_model, d_head, d_vocab):
+    def __init__(self, num_heads, d_embedding, d_head, initialized_std_range):
         super().__init__()
 
-        self.W_Q = nn.Parameter(torch.empty((num_heads, d_model, d_head)))
-        nn.init.normal_(self.W_Q, std=config.config["initialized_std_range"])
+        self.W_Q = nn.Parameter(torch.empty((num_heads, d_embedding, d_head)))
+        self.W_K = nn.Parameter(torch.empty((num_heads, d_embedding, d_head)))
+        self.W_V = nn.Parameter(torch.empty((num_heads, d_embedding, d_head)))
+        self.W_output = nn.Parameter(torch.empty((num_heads, d_head, d_embedding)))
 
-        self.W_K = nn.Parameter(torch.empty((num_heads, d_model, d_head)))
-        nn.init.normal_(self.W_K, std=config.config["initialized_std_range"])
+        self.b_Q = nn.Parameter(torch.zeros((num_heads, d_head)))
+        self.b_K = nn.Parameter(torch.zeros((num_heads, d_head)))
+        self.b_V = nn.Parameter(torch.zeros((num_heads, d_head)))
+        self.b_output = nn.Parameter(torch.zeros((d_embedding)))
 
-        self.W_V = nn.Parameter(torch.empty((num_heads, d_model, d_head)))
-        nn.init.normal_(self.W_V, std=config.config["initialized_std_range"])
-
-        self.W_output = nn.Parameter(torch.empty((num_heads, d_head, d_model)))
-        nn.init.normal_(self.W_output, std=config.config["initialized_std_range"])
-
-        self.b_Q = nn.Parameter(torch.empty((num_heads, d_head)))
-        self.b_K = nn.Parameter(torch.empty((num_heads, d_head)))
-        self.b_V = nn.Parameter(torch.empty((num_heads, d_head)))
-        self.b_output = nn.Parameter(torch.empty((d_model)))
+        nn.init.normal_(self.W_Q, std=initialized_std_range * d_head**0.5)
+        nn.init.normal_(self.W_K, std=initialized_std_range * d_head**0.5)
+        nn.init.normal_(self.W_V, std=initialized_std_range * d_head**0.5)
+        nn.init.normal_(self.W_output, std=initialized_std_range * d_head**0.5)
 
         self.d_head = d_head
 
@@ -39,7 +35,7 @@ class Attention(nn.Module):
             einops.einsum(
                 residual_stream,
                 self.W_Q,
-                "batch seq_length d_model, num_heads d_model d_head -> batch seq_length num_heads d_head",
+                "num_sequences num_tokens d_embedding, num_heads d_embedding d_head -> num_sequences num_tokens num_heads d_head",
             )
             + self.b_Q
         )
@@ -47,7 +43,7 @@ class Attention(nn.Module):
             einops.einsum(
                 residual_stream,
                 self.W_K,
-                "batch seq_length d_model, num_heads d_model d_head -> batch seq_length num_heads d_head",
+                "num_sequences num_tokens d_embedding, num_heads d_embedding d_head -> num_sequences num_tokens num_heads d_head",
             )
             + self.b_K
         )
@@ -55,7 +51,7 @@ class Attention(nn.Module):
             einops.einsum(
                 residual_stream,
                 self.W_V,
-                "batch seq_length d_model, num_heads d_model d_head -> batch seq_length num_heads d_head",
+                "num_sequences num_tokens d_embedding, num_heads d_embedding d_head -> num_sequences num_tokens num_heads d_head",
             )
             + self.b_V
         )
@@ -63,24 +59,28 @@ class Attention(nn.Module):
         attention_scores = einops.einsum(
             q,
             k,
-            "batch seq_length_q num_heads d_head, batch seq_length_k num_heads d_head -> batch num_heads seq_length_q seq_length_k",
+            "num_sequences num_tokens_q num_heads d_head, num_sequences num_tokens_k num_heads d_head -> num_sequences num_heads num_tokens_q num_tokens_k",
         )
 
         scaled_attention_scores = attention_scores / (self.d_head**0.5)
         attention_scores_masked = self.apply_causal_mask(scaled_attention_scores)
+
+        noise = torch.randn_like(attention_scores_masked) * 0.01
+        attention_scores_masked = attention_scores_masked + noise
+
         attention_pattern = attention_scores_masked.softmax(-1)
 
         z = einops.einsum(
             v,
             attention_pattern,
-            "batch seq_length num_heads d_head, batch num_heads seq_length_q seq_length_k -> batch seq_length_q num_heads d_head",
+            "num_sequences num_tokens num_heads d_head, num_sequences num_heads num_tokens_q num_tokens_k -> num_sequences num_tokens_q num_heads d_head",
         )
 
         attention_output = (
             einops.einsum(
                 z,
                 self.W_output,
-                "batch seq_length_q num_heads d_head, num_heads d_head d_model -> batch seq_length_q d_model",
+                "num_sequences num_tokens num_heads d_head, num_heads d_head d_embedding -> num_sequences num_tokens d_embedding",
             )
             + self.b_output
         )
@@ -94,6 +94,6 @@ class Attention(nn.Module):
             device=device.device,
         )
         mask = torch.triu(all_ones, diagonal=1).bool()
-        attention_scores.masked_fill_(mask, self.IGNORE)
+        attention_scores = attention_scores.masked_fill(mask, self.IGNORE)
 
         return attention_scores

@@ -18,7 +18,7 @@ if __name__ == "__main__":
 
     trainer = train.Trainer(
         model=gpt2,
-        batch_size=config.config["batch_size"],
+        num_sequences_per_batch=config.config["num_sequences_per_batch"],
         epochs=config.config["epochs"],
     )
     trainer.train()

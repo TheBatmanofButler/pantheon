@@ -12,9 +12,9 @@ import pantheon.gpt2.core.tokenize as tokenize
 
 
 class Trainer:
-    def __init__(self, model, batch_size, epochs):
+    def __init__(self, model, num_sequences_per_batch, epochs):
         self.model = model
-        self.batch_size = batch_size
+        self.num_sequences_per_batch = num_sequences_per_batch
         self.epochs = epochs
 
         self.sampler = sample.Sampler(self.model)
@@ -25,6 +25,9 @@ class Trainer:
         )
 
         dataset = datasets.load_dataset(config.config["dataset"], split="train")
+        if config.config["limited_dataset_size"]:
+            dataset = dataset.select(range(config.config["limited_dataset_size"]))
+
         tokenized_dataset = transformer_lens.utils.tokenize_and_concatenate(
             dataset,
             tokenize.tokenizer,
@@ -39,13 +42,13 @@ class Trainer:
         )
         self.train_loader = torch.utils.data.DataLoader(
             dataset_dict["train"],
-            batch_size=self.batch_size,
+            batch_size=self.num_sequences_per_batch,
             shuffle=True,
             pin_memory=True,
         )
         self.test_loader = torch.utils.data.DataLoader(
             dataset_dict["test"],
-            batch_size=self.batch_size,
+            batch_size=self.num_sequences_per_batch,
             shuffle=False,
             pin_memory=True,
         )
@@ -71,8 +74,11 @@ class Trainer:
                     f"Epoch {epoch + 1}, Batch {i + 1}, loss: {loss:.3f}, accuracy: {accuracy:.3f}"
                 )
 
-                # if i > config.config["max_batches_per_epoch:
-                #     break
+                if (
+                    config.config["max_batches_per_epoch"]
+                    and i > config.config["max_batches_per_epoch"]
+                ):
+                    break
 
             accuracy = self.evaluate()
             sample_text = self.sampler.sample("Is mayonnaise an instrument?")

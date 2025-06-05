@@ -6,17 +6,25 @@ import pantheon.gpt2.core.config as config
 
 
 class PositionalEmbed(nn.Module):
-    def __init__(self, context_window, d_model):
+    def __init__(self, context_window, d_embedding):
         super().__init__()
 
-        self.W_positional = nn.Parameter(torch.empty((context_window, d_model)))
-        nn.init.normal_(self.W_positional, std=config.config["initialized_std_range"])
+        self.d_embedding = d_embedding
+
+        self.W_positional = nn.Parameter(torch.empty((context_window, d_embedding)))
+        nn.init.normal_(
+            self.W_positional,
+            std=config.config["initialized_std_range"],
+        )
 
     def forward(self, tokens):
         batch, sequence_length = tokens.shape
 
-        return einops.repeat(
-            self.W_positional[:sequence_length],
-            "sequence_length d_model -> batch sequence_length d_model",
-            batch=batch,
+        return (
+            einops.repeat(
+                self.W_positional[:sequence_length],
+                "sequence_length d_embedding -> batch sequence_length d_embedding",
+                batch=batch,
+            )
+            * self.d_embedding**0.5
         )
