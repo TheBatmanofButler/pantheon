@@ -24,7 +24,7 @@ class TransformerBlock(nn.Module):
             num_heads,
             d_embedding,
             d_head,
-            initialized_std_range / (2 * num_heads) ** 0.5,
+            initialized_std_range,
         )
 
         self.layer_norm_2 = layer_norm.LayerNorm(d_embedding, layer_norm_epsilon)
