@@ -16,14 +16,15 @@ context_window = 256
 # Optimization
 learning_rate = 1e-3
 weight_decay = 1e-2
+accumulation_steps = 4  # must evenly divide num_sequences_per_batch
 
 # Training duration
 epochs = 4
-num_sequences_per_batch = 32
+num_sequences_per_batch = 16
 
 # Training limits (optional)
 max_batches_per_epoch = None
-limited_dataset_size = None
+limited_dataset_size = 64
 
 # Weight initialization
 initialized_std_range = 1 / ((2 * num_blocks) ** 0.5)
@@ -36,6 +37,7 @@ dataset = "roneneldan/TinyStories"
 test_size = limited_dataset_size // 10 if limited_dataset_size else 1000
 
 config = {
+    "accumulation_steps": accumulation_steps,
     "context_window": context_window,
     "d_embedding": d_embedding,
     "d_head": d_head,

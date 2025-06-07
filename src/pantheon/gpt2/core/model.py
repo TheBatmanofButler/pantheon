@@ -1,5 +1,6 @@
 import torch
 import torch.nn as nn
+import torch.utils.checkpoint as checkpoint
 
 import pantheon.gpt2.core.config as config
 import pantheon.gpt2.core.positional as positional
@@ -47,7 +48,10 @@ class GPT2(nn.Module):
     def forward(self, tokens) -> torch.Tensor:
         residual = self.embed(tokens) + self.positional_embed(tokens)
         for block in self.blocks:
-            residual = block(residual)
+            residual = checkpoint.checkpoint(self._block, residual, block)
         logits = self.unembed(self.layer_norm_final(residual))
 
         return logits
+
+    def _block(self, residual, block):
+        return block(residual)

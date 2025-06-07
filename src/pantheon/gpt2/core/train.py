@@ -58,39 +58,60 @@ class Trainer:
         self.run = None
 
     def train(self):
-        self.run = wandb.init(
-            # Set the wandb entity where your project will be logged (generally your team name).
-            entity="the-ganesh-ravichandran-none",
-            # Set the wandb project where this run will be logged.
-            project="gpt2",
-            # Track hyperparameters and run metadata.
-            config=config.config,
-        )
+        # self.run = wandb.init(
+        #     # Set the wandb entity where your project will be logged (generally your team name).
+        #     entity="the-ganesh-ravichandran-none",
+        #     # Set the wandb project where this run will be logged.
+        #     project="gpt2",
+        #     # Track hyperparameters and run metadata.
+        #     config=config.config,
+        # )
 
         accuracy = np.nan
-        for epoch in range(self.epochs):
-            for i, batch in enumerate(self.train_loader):
-                loss = self.train_step(batch)
-                print(
-                    f"Epoch {epoch + 1}, Batch {i + 1}, loss: {loss:.3f}, accuracy: {accuracy:.3f}"
-                )
 
-                if (
-                    config.config["max_batches_per_epoch"]
-                    and i > config.config["max_batches_per_epoch"]
-                ):
-                    break
+        torch.cuda.memory._record_memory_history()
 
-            accuracy = self.evaluate()
-            # sample_text = self.sampler.sample("Is mayonnaise an instrument?")
-            # print("\n")
-            # print(sample_text)
+        with torch.profiler.profile(
+            activities=[
+                torch.profiler.ProfilerActivity.CPU,
+                torch.profiler.ProfilerActivity.CUDA,
+            ],
+            schedule=torch.profiler.schedule(wait=0, warmup=0, active=5),
+            record_shapes=True,
+            profile_memory=True,
+            with_stack=True,
+            on_trace_ready=torch.profiler.tensorboard_trace_handler("."),
+        ) as prof:
+            for epoch in range(self.epochs):
+                for step_index, batch in enumerate(self.train_loader):
+                    loss = self.train_step(batch, step_index)
+                    prof.step()
+                    print(
+                        f"Epoch {epoch + 1}, Batch {step_index + 1}, loss: {loss:.3f}, accuracy: {accuracy:.3f}"
+                    )
 
-            if self.save_fn:
-                print("Saving model params to disk.")
-                self.save_fn()
+                    if (
+                        config.config["max_batches_per_epoch"]
+                        and step_index > config.config["max_batches_per_epoch"]
+                    ):
+                        break
 
-        self.run.finish()
+                accuracy = self.evaluate()
+                # sample_text = self.sampler.sample("Is mayonnaise an instrument?")
+                # print("\n")
+                # print(sample_text)
+
+                # if self.save_fn:
+                #     print("Saving model params to disk.")
+                #     self.save_fn()
+
+        prof.export_memory_timeline("shapes.html", device="cuda:0")
+
+        torch.cuda.memory._dump_snapshot("memory.pickle")
+
+        torch.cuda.memory._record_memory_history(enabled=None)
+
+        # self.run.finish()
 
     def evaluate(self):
         self.model.eval()
@@ -105,28 +126,34 @@ class Trainer:
             total_samples += tokens.size(0) * (tokens.size(1) - 1)
 
         accuracy = total_correct / total_samples
-        self.run.log({"accuracy": accuracy}, step=self.step)
+        # self.run.log({"accuracy": accuracy}, step=self.step)
 
         self.model.train()
 
         return accuracy
 
-    def train_step(self, batch):
+    def train_step(self, batch, step_index):
+        accumulation_steps = config.config["accumulation_steps"] or 1
+        print(step_index, accumulation_steps)
+
         tokens = batch["tokens"].to(device.device)
         logits = self.model(tokens)
 
         loss = -self.get_log_probs(logits, tokens).mean()
+        loss /= accumulation_steps
+
         loss.backward()
 
-        # torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)
-        self.optimizer.step()
-        self.optimizer.zero_grad()
+        if (step_index + 1) % accumulation_steps == 0:
+            # torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)
+            self.optimizer.step()
+            self.optimizer.zero_grad()
 
         self.step += 1
-        self.run.log(
-            {"train_loss": loss},
-            step=self.step,
-        )
+        # self.run.log(
+        #     {"train_loss": loss},
+        #     step=self.step,
+        # )
 
         return loss
 
