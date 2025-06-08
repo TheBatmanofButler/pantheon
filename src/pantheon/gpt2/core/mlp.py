@@ -2,23 +2,26 @@ import einops
 import torch
 import torch.nn as nn
 
-import pantheon.gpt2.core.config as config
-
 
 class MLP(nn.Module):
-    def __init__(self, d_embedding, d_mlp):
+    def __init__(
+        self,
+        d_embedding: int,
+        d_mlp: int,
+        initialized_std_range: float,
+    ):
         super().__init__()
 
         self.W_input = nn.Parameter(torch.empty(d_embedding, d_mlp))
         nn.init.normal_(
             self.W_input,
-            std=config.config["initialized_std_range"],
+            std=initialized_std_range,
         )
 
         self.W_output = nn.Parameter(torch.empty(d_mlp, d_embedding))
         nn.init.normal_(
             self.W_output,
-            std=config.config["initialized_std_range"],
+            std=initialized_std_range,
         )
 
         self.b_input = nn.Parameter(torch.zeros(d_mlp))

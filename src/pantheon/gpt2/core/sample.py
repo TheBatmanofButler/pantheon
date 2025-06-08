@@ -3,17 +3,22 @@ from torch.distributions.categorical import Categorical
 import torch
 
 
-import pantheon.gpt2.core.tokenize as tokenize
-import pantheon.gpt2.core.config as config
+import pantheon.gpt2.data.tokenize as tokenize
 import pantheon.gpt2.core.device as device
+import pantheon.gpt2.core.model as model_lib
 
 
 class Sampler:
-    def __init__(self, model):
+    def __init__(
+        self,
+        model: model_lib.GPT2,
+        context_window: int,
+    ):
         self.model = model
+        self.context_window = context_window
 
     def _prep_tokens_for_training(self, tokens):
-        tokens_within_context = tokens[-config.config["context_window"] :]
+        tokens_within_context = tokens[-self.context_window :]
         tokens_with_batch_dimension = tokens_within_context.unsqueeze(0)
 
         return tokens_with_batch_dimension

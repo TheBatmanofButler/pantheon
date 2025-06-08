@@ -2,11 +2,14 @@ import einops
 import torch
 import torch.nn as nn
 
-import pantheon.gpt2.core.config as config
-
 
 class PositionalEmbed(nn.Module):
-    def __init__(self, context_window, d_embedding):
+    def __init__(
+        self,
+        context_window: int,
+        d_embedding: int,
+        initialized_std_range: float,
+    ):
         super().__init__()
 
         self.d_embedding = d_embedding
@@ -14,7 +17,7 @@ class PositionalEmbed(nn.Module):
         self.W_positional = nn.Parameter(torch.empty((context_window, d_embedding)))
         nn.init.normal_(
             self.W_positional,
-            std=config.config["initialized_std_range"],
+            std=initialized_std_range,
         )
 
     def forward(self, tokens):

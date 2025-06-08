@@ -1,11 +1,14 @@
 import torch
 import torch.nn as nn
 
-import pantheon.gpt2.core.config as config
-
 
 class Embed(nn.Module):
-    def __init__(self, d_vocab, d_embedding):
+    def __init__(
+        self,
+        d_vocab,
+        d_embedding,
+        initialized_std_range,
+    ):
         super().__init__()
 
         self.d_embedding = d_embedding
@@ -14,7 +17,7 @@ class Embed(nn.Module):
         nn.init.normal_(
             tensor=self.W,
             mean=0.0,
-            std=config.config["initialized_std_range"],
+            std=initialized_std_range,
         )
 
     def forward(self, tokens):
@@ -22,14 +25,19 @@ class Embed(nn.Module):
 
 
 class Unembed(nn.Module):
-    def __init__(self, d_vocab, d_embedding):
+    def __init__(
+        self,
+        d_vocab,
+        d_embedding,
+        initialized_std_range,
+    ):
         super().__init__()
 
         self.W = nn.Parameter(torch.empty(d_embedding, d_vocab))
         nn.init.normal_(
             tensor=self.W,
             mean=0.0,
-            std=config.config["initialized_std_range"],
+            std=initialized_std_range,
         )
 
     def forward(self, tokens):

@@ -179,3 +179,4 @@ wandb/
 # PyTorch/analysis data
 *.pt
 *.pt.trace.json
+profiling_data/

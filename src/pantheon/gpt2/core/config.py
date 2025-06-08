@@ -1,58 +1,55 @@
-# Core dimensions
-d_embedding = 128
-d_vocab = 50257
+from dataclasses import dataclass, asdict
 
-# Transformer blocks
-num_blocks = 12
-num_heads = 12
-d_head = d_embedding // num_heads
 
-# Feed-forward network
-d_mlp = d_embedding * 4
+@dataclass
+class GPT2Config:
+    # Core dimensions
+    d_embedding: int = 512
+    d_vocab: int = 50257
 
-# Sequence length
-context_window = 256
+    # Transformer blocks
+    num_blocks: int = 12
+    num_heads: int = 8
+    d_head: int = d_embedding // num_heads
 
-# Optimization
-learning_rate = 1e-3
-weight_decay = 1e-2
-accumulation_steps = 4  # must evenly divide num_sequences_per_batch
+    # Feed-forward network
+    d_mlp: int = d_embedding * 4
 
-# Training duration
-epochs = 4
-num_sequences_per_batch = 16
+    # Sequence length
+    context_window: int = 256
 
-# Training limits (optional)
-max_batches_per_epoch = None
-limited_dataset_size = 64
+    # Optimization
+    learning_rate: float = 1e-3
+    weight_decay: float = 1e-2
+    accumulation_steps: int = 1
 
-# Weight initialization
-initialized_std_range = 1 / ((2 * num_blocks) ** 0.5)
+    # Training duration
+    epochs: int = 4
+    num_sequences_per_batch: int = 16
 
-# Normalization
-layer_norm_epsilon = 1e-5
+    # Training limits (optional)
+    max_batches_per_epoch: int = None
+    limited_dataset_size: int = None
 
-# Dataset
-dataset = "roneneldan/TinyStories"
-test_size = limited_dataset_size // 10 if limited_dataset_size else 1000
+    # Weight initialization
+    initialized_std_range: float = 1 / ((2 * num_blocks) ** 0.5)
 
-config = {
-    "accumulation_steps": accumulation_steps,
-    "context_window": context_window,
-    "d_embedding": d_embedding,
-    "d_head": d_head,
-    "d_mlp": d_mlp,
-    "d_vocab": d_vocab,
-    "dataset": dataset,
-    "epochs": epochs,
-    "initialized_std_range": initialized_std_range,
-    "layer_norm_epsilon": layer_norm_epsilon,
-    "learning_rate": learning_rate,
-    "limited_dataset_size": limited_dataset_size,
-    "max_batches_per_epoch": max_batches_per_epoch,
-    "num_blocks": num_blocks,
-    "num_heads": num_heads,
-    "num_sequences_per_batch": num_sequences_per_batch,
-    "test_size": test_size,
-    "weight_decay": weight_decay,
-}
+    # Normalization
+    layer_norm_epsilon: float = 1e-5
+
+    # Dataset
+    dataset_path: str = "roneneldan/TinyStories"
+    dataset_name: str | None = None
+    test_size: int = limited_dataset_size // 10 if limited_dataset_size else 1000
+
+    # Instrumentation
+    wandb_entity: str = "the-ganesh-ravichandran-none"
+    wandb_project: str = "gpt2"
+
+    memory_dump_path: str = "profiling_data/memory.pickle"
+    memory_timeline_path: str = "profiling_data/shapes.html"
+    performance_profile_path: str = "profiling_data/traces"
+
+    def to_dict(self) -> dict:
+        """Convert config to dictionary."""
+        return asdict(self)
