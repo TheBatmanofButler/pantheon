@@ -63,6 +63,10 @@ class InstrumentedTrainer(ABC):
                         self.config.max_batches_per_epoch
                         and step_index > self.config.max_batches_per_epoch
                     ):
+                        print(
+                            f"Ending training early. Saving model params to disk for Epoch {epoch + 1}, Batch {step_index + 1}."
+                        )
+                        self.save_fn()
                         break
 
                 accuracy = self.evaluate()

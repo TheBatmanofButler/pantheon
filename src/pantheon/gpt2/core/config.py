@@ -29,7 +29,7 @@ class GPT2Config:
 
     # Training limits (optional)
     max_batches_per_epoch: int = None
-    limited_dataset_size: int = None
+    limited_dataset_size: int = 500
 
     # Weight initialization
     initialized_std_range: float = 1 / ((2 * num_blocks) ** 0.5)
