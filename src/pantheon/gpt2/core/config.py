@@ -25,7 +25,7 @@ class GPT2Config:
     activation_recomputation: bool = False
 
     # Training duration
-    epochs: int = 1000  # 4
+    epochs: int = 3
     num_sequences_per_batch: int = 16
 
     # Weight initialization
@@ -36,7 +36,7 @@ class GPT2Config:
 
     # Training limits (optional)
     max_batches_per_epoch: int = None
-    limited_dataset_size: int = 200
+    limited_dataset_size: int = None
 
     # Dataset
     dataset_path: str = "roneneldan/TinyStories"
