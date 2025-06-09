@@ -46,8 +46,9 @@ class InstrumentedTrainer(ABC):
 
             accuracy = np.nan
 
+            step_index = 0
             for epoch in range(self.config.epochs):
-                for step_index, batch in enumerate(self.train_loader):
+                for batch_index, batch in enumerate(self.train_loader):
                     if TrainingMode.PERFORMANCE in self.modes:
                         self.instrumentors[TrainingMode.PERFORMANCE].context.step()
 
@@ -55,19 +56,27 @@ class InstrumentedTrainer(ABC):
                         step_index=step_index,
                         batch=batch,
                     )
+                    if TrainingMode.OBSERVABILITY in self.modes:
+                        self.instrumentors[TrainingMode.OBSERVABILITY].context.log(
+                            step=step_index,
+                            content={"train_loss": loss},
+                        )
+
                     print(
-                        f"Epoch {epoch + 1}, Batch {step_index + 1}, loss: {loss:.3f}, accuracy: {accuracy:.3f}"
+                        f"Epoch {epoch + 1}, Batch {batch_index + 1}, loss: {loss:.3f}, accuracy: {accuracy:.3f}"
                     )
 
                     if (
                         self.config.max_batches_per_epoch
-                        and step_index > self.config.max_batches_per_epoch
+                        and batch_index > self.config.max_batches_per_epoch
                     ):
                         print(
                             f"Ending training early. Saving model params to disk for Epoch {epoch + 1}, Batch {step_index + 1}."
                         )
                         self.save_fn()
                         break
+
+                    step_index += 1
 
                 accuracy = self.evaluate()
                 if TrainingMode.OBSERVABILITY in self.modes:

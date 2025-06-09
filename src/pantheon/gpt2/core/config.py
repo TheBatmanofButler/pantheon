@@ -19,23 +19,24 @@ class GPT2Config:
     context_window: int = 256
 
     # Optimization
-    learning_rate: float = 1e-3
-    weight_decay: float = 1e-2
+    learning_rate: float = 3e-4
+    weight_decay: float = 1e-4
     accumulation_steps: int = 1
+    activation_recomputation: bool = False
 
     # Training duration
-    epochs: int = 4
+    epochs: int = 1000  # 4
     num_sequences_per_batch: int = 16
-
-    # Training limits (optional)
-    max_batches_per_epoch: int = None
-    limited_dataset_size: int = 500
 
     # Weight initialization
     initialized_std_range: float = 1 / ((2 * num_blocks) ** 0.5)
 
     # Normalization
     layer_norm_epsilon: float = 1e-5
+
+    # Training limits (optional)
+    max_batches_per_epoch: int = None
+    limited_dataset_size: int = 200
 
     # Dataset
     dataset_path: str = "roneneldan/TinyStories"

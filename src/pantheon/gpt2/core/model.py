@@ -14,45 +14,50 @@ class GPT2(nn.Module):
     def __init__(self, config: config.GPT2Config):
         super().__init__()
 
+        self.config = config
+
         self.embed = embed.Embed(
-            d_vocab=config.d_vocab,
-            d_embedding=config.d_embedding,
-            initialized_std_range=config.initialized_std_range,
+            d_vocab=self.config.d_vocab,
+            d_embedding=self.config.d_embedding,
+            initialized_std_range=self.config.initialized_std_range,
         )
         self.positional_embed = positional.PositionalEmbed(
-            context_window=config.context_window,
-            d_embedding=config.d_embedding,
-            initialized_std_range=config.initialized_std_range,
+            context_window=self.config.context_window,
+            d_embedding=self.config.d_embedding,
+            initialized_std_range=self.config.initialized_std_range,
         )
 
         self.blocks = nn.ModuleList(
             [
                 transformer_block.TransformerBlock(
                     block_index=block_index,
-                    d_embedding=config.d_embedding,
-                    d_head=config.d_head,
-                    d_mlp=config.d_mlp,
-                    initialized_std_range=config.initialized_std_range,
-                    layer_norm_epsilon=config.layer_norm_epsilon,
-                    num_heads=config.num_heads,
+                    d_embedding=self.config.d_embedding,
+                    d_head=self.config.d_head,
+                    d_mlp=self.config.d_mlp,
+                    initialized_std_range=self.config.initialized_std_range,
+                    layer_norm_epsilon=self.config.layer_norm_epsilon,
+                    num_heads=self.config.num_heads,
                 )
-                for block_index in range(config.num_blocks)
+                for block_index in range(self.config.num_blocks)
             ]
         )
         self.layer_norm_final = layer_norm.LayerNorm(
-            d_embedding=config.d_embedding,
-            layer_norm_epsilon=config.layer_norm_epsilon,
+            d_embedding=self.config.d_embedding,
+            layer_norm_epsilon=self.config.layer_norm_epsilon,
         )
         self.unembed = embed.Unembed(
-            d_embedding=config.d_embedding,
-            d_vocab=config.d_vocab,
-            initialized_std_range=config.initialized_std_range,
+            d_embedding=self.config.d_embedding,
+            d_vocab=self.config.d_vocab,
+            initialized_std_range=self.config.initialized_std_range,
         )
 
     def forward(self, tokens) -> torch.Tensor:
         residual = self.embed(tokens) + self.positional_embed(tokens)
         for block in self.blocks:
-            residual = checkpoint.checkpoint(self._block, residual, block)
+            if self.config.activation_recomputation:
+                residual = checkpoint.checkpoint(self._block, residual, block)
+            else:
+                residual = self._block(residual, block)
         logits = self.unembed(self.layer_norm_final(residual))
 
         return logits
