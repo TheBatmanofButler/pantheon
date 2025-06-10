@@ -25,7 +25,7 @@ class GPT2Config:
     activation_recomputation: bool = False
 
     # Training duration
-    epochs: int = 3
+    epochs: int = 1
     num_sequences_per_batch: int = 16
 
     # Weight initialization
@@ -35,7 +35,7 @@ class GPT2Config:
     layer_norm_epsilon: float = 1e-5
 
     # Training limits (optional)
-    max_batches_per_epoch: int = None
+    max_batches_per_epoch: int = 8
     limited_dataset_size: int = None
 
     # Dataset
@@ -47,9 +47,11 @@ class GPT2Config:
     wandb_entity: str = "the-ganesh-ravichandran-none"
     wandb_project: str = "gpt2"
 
-    memory_dump_path: str = "profiling_data/memory.pickle"
+    memory_dump_path: str = "profiling_data/snapshot.pickle"
     memory_timeline_path: str = "profiling_data/shapes.html"
+
     performance_profile_path: str = "profiling_data/traces"
+    record_shapes: bool = True
 
     def to_dict(self) -> dict:
         """Convert config to dictionary."""

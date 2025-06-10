@@ -23,8 +23,8 @@ if __name__ == "__main__":
 
     trainer = train.Trainer(
         modes=[
-            TrainingMode.OBSERVABILITY,
-            TrainingMode.CHECKPOINTED_SAVES,
+            # TrainingMode.MEMORY,
+            TrainingMode.PERFORMANCE,
         ],
         config=config,
         save_fn=lambda: torch.save(gpt2.state_dict(), args.output),
