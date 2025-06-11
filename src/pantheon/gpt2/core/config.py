@@ -35,7 +35,7 @@ class GPT2Config:
     layer_norm_epsilon: float = 1e-5
 
     # Training limits (optional)
-    max_batches_per_epoch: int = 8
+    max_batches_per_epoch: int = 4
     limited_dataset_size: int = None
 
     # Dataset

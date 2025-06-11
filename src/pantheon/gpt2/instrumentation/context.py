@@ -7,6 +7,7 @@ class ObservabilityContextManager:
         self.config = config
 
     def __enter__(self):
+        print("Starting observability recording")
         self.run = wandb.init(
             # Set the wandb entity where your project will be logged (generally your team name).
             entity=self.config.wandb_entity,
@@ -27,7 +28,10 @@ class MemoryContextManager:
         self.config = config
 
     def __enter__(self):
-        torch.cuda.memory._record_memory_history()
+        print("Starting memory recording")
+        torch.cuda.memory._record_memory_history(
+            max_entries=100000,
+        )
 
         return self
 
@@ -44,6 +48,7 @@ class PerformanceContextManager:
         self.profile_ctx_manager = None
 
     def __enter__(self):
+        print("Starting performance recording")
         self.profile_ctx_manager = torch.profiler.profile(
             activities=[
                 torch.profiler.ProfilerActivity.CPU,
@@ -51,8 +56,8 @@ class PerformanceContextManager:
             ],
             schedule=torch.profiler.schedule(
                 wait=0,
-                warmup=1,
-                active=5,
+                warmup=0,
+                active=4,
                 repeat=1,
             ),
             record_shapes=self.config.record_shapes,
