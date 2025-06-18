@@ -38,6 +38,8 @@ class InstrumentedTrainer(ABC):
         self.save_fn = save_fn
         self.config = config
 
+        print("Using modes: ", self.modes)
+
     def train(self) -> None:
         train_start_time = time.time()
 
@@ -47,9 +49,15 @@ class InstrumentedTrainer(ABC):
                     self.instrumentors[mode].manager
                 )
 
+            if TrainingMode.MEMORY in self.modes:
+                torch._C._cuda_attach_out_of_memory_observer(
+                    self.instrumentors[TrainingMode.MEMORY].context.oom_observer
+                )
+
             accuracy = np.nan
 
             step_index = 0
+            average_batch_time = 0
             for epoch in range(self.config.epochs):
                 for batch_index, batch in enumerate(self.train_loader):
                     batch_start_time = time.time()
@@ -68,11 +76,17 @@ class InstrumentedTrainer(ABC):
                             content={"train_loss": loss},
                         )
 
+                    average_batch_time = (
+                        average_batch_time * batch_index
+                        + (time.time() - batch_start_time)
+                    ) / (batch_index + 1)
+
                     print(
                         f"Finished Epoch {epoch + 1}, Batch {batch_index + 1}"
                         f"\n  Loss: {loss:.3f}"
                         f"\n  Accuracy: {accuracy:.3f}"
                         f"\n  Batch process time: {(time.time() - batch_start_time) * 1000:.0f}ms"
+                        f"\n  Average batch process time: {average_batch_time * 1000:.0f}ms"
                         f"\n  Current wall time: {(time.time() - train_start_time) * 1000:.0f}ms"
                     )
                     if TrainingMode.PERFORMANCE in self.modes:

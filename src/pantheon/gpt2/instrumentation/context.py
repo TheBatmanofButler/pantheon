@@ -22,6 +22,9 @@ class ObservabilityContextManager:
     def __exit__(self, *_):
         self.run.finish()
 
+    def log(self, step, content):
+        self.run.log(content, step=step)
+
 
 class MemoryContextManager:
     def __init__(self, config):
@@ -38,6 +41,11 @@ class MemoryContextManager:
     def __exit__(self, *_):
         print(f"Dumping memory snapshot at {self.config.memory_dump_path}")
 
+        torch.cuda.memory._dump_snapshot(self.config.memory_dump_path)
+        torch.cuda.memory._record_memory_history(enabled=None)
+
+    def oom_observer(self, device, alloc, device_alloc, device_free):
+        print("Saving memory snapshot at OOM")
         torch.cuda.memory._dump_snapshot(self.config.memory_dump_path)
         torch.cuda.memory._record_memory_history(enabled=None)
 
