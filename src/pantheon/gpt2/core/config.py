@@ -7,6 +7,9 @@ class GPT2Config:
     d_embedding: int = 512
     d_vocab: int = 50257
 
+    # Sequence length
+    context_window: int = 256
+
     # Transformer blocks
     num_blocks: int = 12
     num_heads: int = 8
@@ -14,9 +17,6 @@ class GPT2Config:
 
     # Feed-forward network
     d_mlp: int = d_embedding * 4
-
-    # Sequence length
-    context_window: int = 256
 
     # Optimization
     learning_rate: float = 3e-4
