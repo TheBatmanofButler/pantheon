@@ -1,5 +1,6 @@
 import argparse
 import torch
+import time
 
 import pantheon.gpt2.core.model as model
 
@@ -23,11 +24,14 @@ if __name__ == "__main__":
 
     trainer = train.Trainer(
         modes=[
-            TrainingMode.OBSERVABILITY,
+            # TrainingMode.MEMORY,
+            # TrainingMode.PERFORMANCE,
             TrainingMode.CHECKPOINTED_SAVES,
+            TrainingMode.OBSERVABILITY,
         ],
         config=config,
         save_fn=lambda: torch.save(gpt2.state_dict(), args.output),
         model=gpt2,
     )
+
     trainer.train()

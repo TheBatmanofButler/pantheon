@@ -7,6 +7,7 @@ class ObservabilityContextManager:
         self.config = config
 
     def __enter__(self):
+        print("Starting observability recording")
         self.run = wandb.init(
             # Set the wandb entity where your project will be logged (generally your team name).
             entity=self.config.wandb_entity,
@@ -21,11 +22,8 @@ class ObservabilityContextManager:
     def __exit__(self, *_):
         self.run.finish()
 
-    def log(self, content, step):
-        self.run.log(
-            data=content,
-            step=step,
-        )
+    def log(self, step, content):
+        self.run.log(content, step=step)
 
 
 class MemoryContextManager:
@@ -33,11 +31,21 @@ class MemoryContextManager:
         self.config = config
 
     def __enter__(self):
-        torch.cuda.memory._record_memory_history()
+        print("Starting memory recording")
+        torch.cuda.memory._record_memory_history(
+            max_entries=100000,
+        )
 
         return self
 
     def __exit__(self, *_):
+        print(f"Dumping memory snapshot at {self.config.memory_dump_path}")
+
+        torch.cuda.memory._dump_snapshot(self.config.memory_dump_path)
+        torch.cuda.memory._record_memory_history(enabled=None)
+
+    def oom_observer(self, device, alloc, device_alloc, device_free):
+        print("Saving memory snapshot at OOM")
         torch.cuda.memory._dump_snapshot(self.config.memory_dump_path)
         torch.cuda.memory._record_memory_history(enabled=None)
 
@@ -48,13 +56,19 @@ class PerformanceContextManager:
         self.profile_ctx_manager = None
 
     def __enter__(self):
+        print("Starting performance recording")
         self.profile_ctx_manager = torch.profiler.profile(
             activities=[
                 torch.profiler.ProfilerActivity.CPU,
                 torch.profiler.ProfilerActivity.CUDA,
             ],
-            schedule=torch.profiler.schedule(wait=0, warmup=0, active=5),
-            record_shapes=True,
+            schedule=torch.profiler.schedule(
+                wait=0,
+                warmup=0,
+                active=4,
+                repeat=1,
+            ),
+            record_shapes=self.config.record_shapes,
             profile_memory=True,
             with_stack=True,
             on_trace_ready=torch.profiler.tensorboard_trace_handler(
@@ -67,13 +81,12 @@ class PerformanceContextManager:
 
     def __exit__(self, *_):
         self.profile_ctx_manager.__exit__(*_)
+
+        print(f"Saving memory timeline at {self.config.memory_timeline_path}")
         self.profile_ctx_manager.export_memory_timeline(
             self.config.memory_timeline_path,
             device="cuda:0",
         )
-
-    def step(self):
-        self.profile_ctx_manager.step()
 
 
 class ManagedInstrumentor:
