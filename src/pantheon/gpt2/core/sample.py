@@ -26,9 +26,10 @@ class Sampler:
     def _get_final_token_logits(self, logits):
         return logits[0, -1]
 
-    def sample(self, prompt, max_tokens_generated=100):
+    def sample(self, prompt, max_tokens_generated=100, include_prompt=True):
         self.model.eval()
-        input_ids = torch.IntTensor(tokenize.tokenizer.encode(prompt)).to(device.device)
+        prompt_tokens = torch.IntTensor(tokenize.tokenizer.encode(prompt)).to(device.device)
+        input_ids = prompt_tokens.clone()
 
         for _ in range(max_tokens_generated):
             logits = self._get_final_token_logits(
@@ -44,4 +45,9 @@ class Sampler:
             if next_token == tokenize.tokenizer.eos_token_id:
                 break
 
-        return tokenize.tokenizer.decode(input_ids.tolist())
+        if include_prompt:
+            return tokenize.tokenizer.decode(input_ids.tolist())
+        else:
+            # Return only the generated tokens (excluding the prompt)
+            generated_tokens = input_ids[len(prompt_tokens):]
+            return tokenize.tokenizer.decode(generated_tokens.tolist())

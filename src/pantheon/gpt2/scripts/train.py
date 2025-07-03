@@ -1,6 +1,5 @@
 import argparse
 import torch
-import time
 
 import pantheon.gpt2.core.model as model
 
@@ -18,9 +17,11 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    # gpt2 = nn.DataParallel(model.GPT2()).to(device.device)
     config = config_lib.GPT2Config()
-    gpt2 = model.GPT2(config=config).to(device.device)
+    gpt2 = model.GPT2(config=config)
+    if torch.cuda.device_count() > 1:
+        gpt2 = torch.nn.DataParallel(gpt2)
+    gpt2.to(device.device)
 
     trainer = train.Trainer(
         modes=[
