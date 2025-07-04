@@ -31,14 +31,16 @@ def build_dataloaders(
     train_loader = torch.utils.data.DataLoader(
         dataset_dict["train"],
         batch_size=config.num_sequences_per_batch,
-        shuffle=True,
+        shuffle=False,
         pin_memory=True,
+        sampler=torch.utils.data.distributed.DistributedSampler(dataset_dict["train"]),
     )
     test_loader = torch.utils.data.DataLoader(
         dataset_dict["test"],
         batch_size=config.num_sequences_per_batch,
         shuffle=False,
         pin_memory=True,
+        sampler=torch.utils.data.distributed.DistributedSampler(dataset_dict["test"]),
     )
 
     return train_loader, test_loader
