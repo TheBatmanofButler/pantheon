@@ -8,11 +8,11 @@ class GPT2Config:
     d_vocab: int = 50257
 
     # Sequence length
-    context_window: int = 256
+    context_window: int = 512
 
     # Transformer blocks
     num_blocks: int = 12
-    num_heads: int = 8
+    num_heads: int = 12
     d_head: int = d_embedding // num_heads
 
     # Feed-forward network
