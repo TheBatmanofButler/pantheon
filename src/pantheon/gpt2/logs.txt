@@ -1,0 +1,772 @@
+W0706 11:04:03.614000 1718845 torch/distributed/run.py:766] 
+W0706 11:04:03.614000 1718845 torch/distributed/run.py:766] *****************************************
+W0706 11:04:03.614000 1718845 torch/distributed/run.py:766] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W0706 11:04:03.614000 1718845 torch/distributed/run.py:766] *****************************************
+Using device cuda
+Using device cuda
+Using device cuda
+Using device cuda
+Process 3: Starting on local_rank 3
+GPU 3: Total=7.9GB, Allocated=0.0GB, Reserved=0.0GB
+Fragmentation: Reserved-Allocated = 0MB wasted
+GPU 3: Total=7.9GB, Allocated=0.0GB, Reserved=0.0GB
+Fragmentation: Reserved-Allocated = 0MB wasted
+Rank: 3
+Process 0: Starting on local_rank 0
+GPU 0: Total=7.9GB, Allocated=0.0GB, Reserved=0.0GB
+Fragmentation: Reserved-Allocated = 0MB wasted
+GPU 0: Total=7.9GB, Allocated=0.0GB, Reserved=0.0GB
+Fragmentation: Reserved-Allocated = 0MB wasted
+Rank: 0
+Process 1: Starting on local_rank 1
+GPU 1: Total=7.9GB, Allocated=0.0GB, Reserved=0.0GB
+Fragmentation: Reserved-Allocated = 0MB wasted
+GPU 1: Total=7.9GB, Allocated=0.0GB, Reserved=0.0GB
+Fragmentation: Reserved-Allocated = 0MB wasted
+Rank: 1
+Process 2: Starting on local_rank 2
+GPU 2: Total=7.9GB, Allocated=0.0GB, Reserved=0.0GB
+Fragmentation: Reserved-Allocated = 0MB wasted
+GPU 2: Total=7.9GB, Allocated=0.0GB, Reserved=0.0GB
+Fragmentation: Reserved-Allocated = 0MB wasted
+Rank: 2
+GPU 3: Total=7.9GB, Allocated=0.0GB, Reserved=0.4GB
+Fragmentation: Reserved-Allocated = 376MB wasted
+Using modes:  [<TrainingMode.MEMORY: 3>]
+GPU 0: Total=7.9GB, Allocated=0.0GB, Reserved=0.4GB
+Fragmentation: Reserved-Allocated = 376MB wasted
+Using modes:  [<TrainingMode.MEMORY: 3>]
+GPU 1: Total=7.9GB, Allocated=0.0GB, Reserved=0.4GB
+Fragmentation: Reserved-Allocated = 376MB wasted
+Using modes:  [<TrainingMode.MEMORY: 3>]
+GPU 2: Total=7.9GB, Allocated=0.0GB, Reserved=0.4GB
+Fragmentation: Reserved-Allocated = 376MB wasted
+Using modes:  [<TrainingMode.MEMORY: 3>]
+GPU 3: Total=7.9GB, Allocated=0.0GB, Reserved=0.4GB
+Fragmentation: Reserved-Allocated = 376MB wasted
+Starting memory recording
+GPU 3: Total=7.9GB, Allocated=0.0GB, Reserved=0.4GB
+Fragmentation: Reserved-Allocated = 376MB wasted
+Starting Epoch 1, Batch 1
+  Batch start time (relative): 45ms
+GPU 0: Total=7.9GB, Allocated=0.0GB, Reserved=0.4GB
+Fragmentation: Reserved-Allocated = 376MB wasted
+Starting memory recording
+GPU 1: Total=7.9GB, Allocated=0.0GB, Reserved=0.4GB
+Fragmentation: Reserved-Allocated = 376MB wasted
+Starting memory recording
+GPU 0: Total=7.9GB, Allocated=0.0GB, Reserved=0.4GB
+Fragmentation: Reserved-Allocated = 376MB wasted
+Starting Epoch 1, Batch 1
+  Batch start time (relative): 50ms
+ganesh-adversarial-network:1718878:1718878 [0] NCCL INFO Bootstrap: Using wlp5s0:192.168.1.210<0>
+ganesh-adversarial-network:1718878:1718878 [0] NCCL INFO cudaDriverVersion 12080
+ganesh-adversarial-network:1718878:1718878 [0] NCCL INFO NCCL version 2.26.2+cuda12.2
+ganesh-adversarial-network:1718878:1718878 [0] NCCL INFO init.cc:1670 Cuda Host Alloc Size 4 pointer 0x767db3410000
+ganesh-adversarial-network:1718878:1718878 [0] NCCL INFO Comm config Blocking set to 1
+ganesh-adversarial-network:1718881:1718881 [3] NCCL INFO cudaDriverVersion 12080
+ganesh-adversarial-network:1718881:1718881 [3] NCCL INFO Bootstrap: Using wlp5s0:192.168.1.210<0>
+ganesh-adversarial-network:1718881:1718881 [3] NCCL INFO NCCL version 2.26.2+cuda12.2
+ganesh-adversarial-network:1718881:1718881 [3] NCCL INFO init.cc:1670 Cuda Host Alloc Size 4 pointer 0x759bf7410000
+ganesh-adversarial-network:1718881:1718881 [3] NCCL INFO Comm config Blocking set to 1
+GPU 1: Total=7.9GB, Allocated=0.0GB, Reserved=0.4GB
+Fragmentation: Reserved-Allocated = 376MB wasted
+Starting Epoch 1, Batch 1
+  Batch start time (relative): 55ms
+ganesh-adversarial-network:1718879:1718879 [1] NCCL INFO cudaDriverVersion 12080
+ganesh-adversarial-network:1718879:1718879 [1] NCCL INFO Bootstrap: Using wlp5s0:192.168.1.210<0>
+ganesh-adversarial-network:1718879:1718879 [1] NCCL INFO NCCL version 2.26.2+cuda12.2
+ganesh-adversarial-network:1718879:1718879 [1] NCCL INFO init.cc:1670 Cuda Host Alloc Size 4 pointer 0x771867410000
+ganesh-adversarial-network:1718879:1718879 [1] NCCL INFO Comm config Blocking set to 1
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO NET/Plugin: Could not find: libnccl-net.so. Using internal net plugin.
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO NET/IB : No device found.
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO NET/IB : Using [RO]; OOB wlp5s0:192.168.1.210<0>
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO NET/Socket : Using [0]wlp5s0:192.168.1.210<0> [1]tailscale0:100.84.100.127<0>
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO Could not get speed from /sys/class/net/wlp5s0/speed. Defaulting to 10 Gbps.
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO PROFILER/Plugin: Could not find: libnccl-profiler.so. 
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO Using network Socket
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO ncclCommInitRankConfig comm 0x1e9e8b70 rank 0 nranks 4 cudaDev 0 nvmlDev 0 busId 8000 commId 0xc54f816bb76d83cc - Init START
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO NET/Plugin: Could not find: libnccl-net.so. Using internal net plugin.
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO NET/IB : No device found.
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO NET/IB : Using [RO]; OOB wlp5s0:192.168.1.210<0>
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO NET/Socket : Using [0]wlp5s0:192.168.1.210<0> [1]tailscale0:100.84.100.127<0>
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO Could not get speed from /sys/class/net/wlp5s0/speed. Defaulting to 10 Gbps.
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO PROFILER/Plugin: Could not find: libnccl-profiler.so. 
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO Using network Socket
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO ncclCommInitRankConfig comm 0x224c6ea0 rank 3 nranks 4 cudaDev 3 nvmlDev 3 busId 43000 commId 0xc54f816bb76d83cc - Init START
+GPU 2: Total=7.9GB, Allocated=0.0GB, Reserved=0.4GB
+Fragmentation: Reserved-Allocated = 376MB wasted
+Starting memory recording
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO NET/Plugin: Could not find: libnccl-net.so. Using internal net plugin.
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO NET/IB : No device found.
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO NET/IB : Using [RO]; OOB wlp5s0:192.168.1.210<0>
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO NET/Socket : Using [0]wlp5s0:192.168.1.210<0> [1]tailscale0:100.84.100.127<0>
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO Could not get speed from /sys/class/net/wlp5s0/speed. Defaulting to 10 Gbps.
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO PROFILER/Plugin: Could not find: libnccl-profiler.so. 
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO Using network Socket
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO ncclCommInitRankConfig comm 0x44ac7a70 rank 1 nranks 4 cudaDev 1 nvmlDev 1 busId 9000 commId 0xc54f816bb76d83cc - Init START
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO RAS network listening socket at 192.168.1.210<45681>
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO RAS client listening socket at 127.0.0.1<28028>
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO Mem Realloc old size 0, new size 256 pointer 0x192effd0
+ganesh-adversarial-network:1718878:1719030 [0] NCCL INFO RAS thread started
+ganesh-adversarial-network:1718878:1719030 [0] NCCL INFO Mem Realloc old size 0, new size 32 pointer 0x767dc000aed0
+GPU 2: Total=7.9GB, Allocated=0.0GB, Reserved=0.4GB
+Fragmentation: Reserved-Allocated = 376MB wasted
+Starting Epoch 1, Batch 1
+  Batch start time (relative): 49ms
+ganesh-adversarial-network:1718880:1718880 [2] NCCL INFO cudaDriverVersion 12080
+ganesh-adversarial-network:1718880:1718880 [2] NCCL INFO Bootstrap: Using wlp5s0:192.168.1.210<0>
+ganesh-adversarial-network:1718880:1718880 [2] NCCL INFO NCCL version 2.26.2+cuda12.2
+ganesh-adversarial-network:1718880:1718880 [2] NCCL INFO init.cc:1670 Cuda Host Alloc Size 4 pointer 0x7c7d43410000
+ganesh-adversarial-network:1718880:1718880 [2] NCCL INFO Comm config Blocking set to 1
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO NET/Plugin: Could not find: libnccl-net.so. Using internal net plugin.
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO NET/IB : No device found.
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO NET/IB : Using [RO]; OOB wlp5s0:192.168.1.210<0>
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO NET/Socket : Using [0]wlp5s0:192.168.1.210<0> [1]tailscale0:100.84.100.127<0>
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO Could not get speed from /sys/class/net/wlp5s0/speed. Defaulting to 10 Gbps.
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO PROFILER/Plugin: Could not find: libnccl-profiler.so. 
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO Using network Socket
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO ncclCommInitRankConfig comm 0x3fc4c590 rank 2 nranks 4 cudaDev 2 nvmlDev 2 busId 42000 commId 0xc54f816bb76d83cc - Init START
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO RAS network listening socket at 192.168.1.210<45603>
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO RAS network listening socket at 192.168.1.210<45061>
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO RAS network listening socket at 192.168.1.210<45165>
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO RAS client listening socket at 127.0.0.1<28028>
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO RAS client listening socket at 127.0.0.1<28028>
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO RAS client listening socket at 127.0.0.1<28028>
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO Mem Realloc old size 0, new size 256 pointer 0x3eeac730
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO Mem Realloc old size 0, new size 256 pointer 0x1cdb27f0
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO Mem Realloc old size 0, new size 256 pointer 0x3a14d520
+ganesh-adversarial-network:1718879:1719035 [0] NCCL INFO RAS thread started
+ganesh-adversarial-network:1718879:1719035 [0] NCCL INFO Mem Realloc old size 0, new size 32 pointer 0x77183400ae00
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO Bootstrap timings total 0.159534 (create 0.000033, send 0.000153, recv 0.158697, ring 0.000177, delay 0.000000)
+ganesh-adversarial-network:1718879:1719035 [0] NCCL INFO RAS handling local addRanks request (old nRasPeers 0)
+ganesh-adversarial-network:1718879:1719035 [0] NCCL INFO RAS finished local processing of addRanks request (new nRasPeers 4, nRankPeers 4)
+ganesh-adversarial-network:1718881:1719036 [0] NCCL INFO RAS thread started
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO Bootstrap timings total 0.001101 (create 0.000032, send 0.000161, recv 0.000397, ring 0.000160, delay 0.000000)
+ganesh-adversarial-network:1718879:1719035 [0] NCCL INFO RAS link 1: opening new primary connection with 192.168.1.210<45681>
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO Bootstrap timings total 0.216813 (create 0.000057, send 0.000177, recv 0.057387, ring 0.158737, delay 0.000000)
+ganesh-adversarial-network:1718881:1719036 [0] NCCL INFO Mem Realloc old size 0, new size 32 pointer 0x759be400aed0
+ganesh-adversarial-network:1718880:1719037 [0] NCCL INFO RAS thread started
+ganesh-adversarial-network:1718880:1719037 [0] NCCL INFO Mem Realloc old size 0, new size 32 pointer 0x7c7d3000aed0
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO Bootstrap timings total 0.200471 (create 0.000036, send 0.000169, recv 0.000147, ring 0.000187, delay 0.000000)
+ganesh-adversarial-network:1718878:1719030 [0] NCCL INFO RAS handling local addRanks request (old nRasPeers 0)
+ganesh-adversarial-network:1718880:1719037 [0] NCCL INFO RAS handling local addRanks request (old nRasPeers 0)
+ganesh-adversarial-network:1718878:1719030 [0] NCCL INFO RAS finished local processing of addRanks request (new nRasPeers 4, nRankPeers 4)
+ganesh-adversarial-network:1718881:1719036 [0] NCCL INFO RAS handling local addRanks request (old nRasPeers 0)
+ganesh-adversarial-network:1718880:1719037 [0] NCCL INFO RAS finished local processing of addRanks request (new nRasPeers 4, nRankPeers 4)
+ganesh-adversarial-network:1718879:1719035 [0] NCCL INFO RAS link -1: calculated deferred primary connection with 192.168.1.210<45165>
+ganesh-adversarial-network:1718878:1719030 [0] NCCL INFO RAS link 1: calculated deferred primary connection with 192.168.1.210<45061>
+ganesh-adversarial-network:1718880:1719037 [0] NCCL INFO RAS link 1: opening new primary connection with 192.168.1.210<45603>
+ganesh-adversarial-network:1718881:1719036 [0] NCCL INFO RAS finished local processing of addRanks request (new nRasPeers 4, nRankPeers 4)
+ganesh-adversarial-network:1718878:1719030 [0] NCCL INFO RAS link -1: calculated deferred primary connection with 192.168.1.210<45603>
+ganesh-adversarial-network:1718881:1719036 [0] NCCL INFO RAS peer 0: socket 192.168.1.210<45061>, pid 1718881, GPU 3 [this process]
+ganesh-adversarial-network:1718881:1719036 [0] NCCL INFO RAS peer 1: socket 192.168.1.210<45165>, pid 1718880, GPU 2
+ganesh-adversarial-network:1718881:1719036 [0] NCCL INFO RAS peer 2: socket 192.168.1.210<45603>, pid 1718879, GPU 1
+ganesh-adversarial-network:1718881:1719036 [0] NCCL INFO RAS peer 3: socket 192.168.1.210<45681>, pid 1718878, GPU 0
+ganesh-adversarial-network:1718878:1719030 [0] NCCL INFO RAS new incoming socket connection from 192.168.1.210<50336>
+ganesh-adversarial-network:1718881:1719036 [0] NCCL INFO RAS peersHash 0x6bf83aa6935caf36
+ganesh-adversarial-network:1718881:1719036 [0] NCCL INFO RAS link 1: opening new primary connection with 192.168.1.210<45165>
+ganesh-adversarial-network:1718878:1719030 [0] NCCL INFO RAS handling connInit from 192.168.1.210<50336> (version 22602, listeningAddr 192.168.1.210<45603>, peersHash 0x6bf83aa6935caf36, deadPeersHash 0x0)
+ganesh-adversarial-network:1718880:1719037 [0] NCCL INFO RAS link -1: calculated deferred primary connection with 192.168.1.210<45061>
+ganesh-adversarial-network:1718880:1719037 [0] NCCL INFO Mem Realloc old size 32, new size 64 pointer 0x7c7d3000b340
+ganesh-adversarial-network:1718880:1719037 [0] NCCL INFO RAS new incoming socket connection from 192.168.1.210<59264>
+ganesh-adversarial-network:1718879:1719035 [0] NCCL INFO Mem Realloc old size 32, new size 64 pointer 0x77183400b340
+ganesh-adversarial-network:1718881:1719036 [0] NCCL INFO RAS link -1: opening new primary connection with 192.168.1.210<45681>
+ganesh-adversarial-network:1718879:1719035 [0] NCCL INFO RAS new incoming socket connection from 192.168.1.210<38096>
+ganesh-adversarial-network:1718879:1719035 [0] NCCL INFO RAS handling connInitAck from 192.168.1.210<45681> (nack 0)
+ganesh-adversarial-network:1718879:1719035 [0] NCCL INFO RAS established connection with 192.168.1.210<45681> (sendQ empty, experiencingDelays 0, startRetryTime 0.00s)
+ganesh-adversarial-network:1718879:1719035 [0] NCCL INFO RAS handling connInit from 192.168.1.210<38096> (version 22602, listeningAddr 192.168.1.210<45165>, peersHash 0x6bf83aa6935caf36, deadPeersHash 0x0)
+ganesh-adversarial-network:1718878:1719030 [0] NCCL INFO Mem Realloc old size 32, new size 64 pointer 0x767dc000b4a0
+ganesh-adversarial-network:1718881:1719036 [0] NCCL INFO Mem Realloc old size 32, new size 64 pointer 0x759be400b340
+ganesh-adversarial-network:1718878:1719030 [0] NCCL INFO RAS new incoming socket connection from 192.168.1.210<50342>
+ganesh-adversarial-network:1718880:1719037 [0] NCCL INFO RAS handling connInitAck from 192.168.1.210<45603> (nack 0)
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO TOPO/NET : Importing network plugins to topology
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO TOPO/NET : Importing network plugins to topology
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO Retrieving state for Socket
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO TOPO/NET : Importing network plugins to topology
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO TOPO/NET : Importing network plugins to topology
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO Retrieving state for Socket
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO Initialized state 0 for Socket
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO Retrieving state for Socket
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO Retrieving state for Socket
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO Initialized state 0 for Socket
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO Initialized state 0 for Socket
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO Initialized state 0 for Socket
+ganesh-adversarial-network:1718878:1719030 [0] NCCL INFO RAS handling connInit from 192.168.1.210<50342> (version 22602, listeningAddr 192.168.1.210<45061>, peersHash 0x6bf83aa6935caf36, deadPeersHash 0x0)
+ganesh-adversarial-network:1718880:1719037 [0] NCCL INFO RAS established connection with 192.168.1.210<45603> (sendQ empty, experiencingDelays 0, startRetryTime 0.00s)
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO Could not get speed from /sys/class/net/wlp5s0/speed. Defaulting to 10 Gbps.
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO Could not get speed from /sys/class/net/wlp5s0/speed. Defaulting to 10 Gbps.
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO Could not get speed from /sys/class/net/wlp5s0/speed. Defaulting to 10 Gbps.
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO Could not get speed from /sys/class/net/wlp5s0/speed. Defaulting to 10 Gbps.
+ganesh-adversarial-network:1718880:1719037 [0] NCCL INFO RAS handling connInit from 192.168.1.210<59264> (version 22602, listeningAddr 192.168.1.210<45061>, peersHash 0x6bf83aa6935caf36, deadPeersHash 0x0)
+ganesh-adversarial-network:1718881:1719036 [0] NCCL INFO RAS handling connInitAck from 192.168.1.210<45681> (nack 0)
+ganesh-adversarial-network:1718881:1719036 [0] NCCL INFO RAS established connection with 192.168.1.210<45681> (sendQ empty, experiencingDelays 0, startRetryTime 0.00s)
+ganesh-adversarial-network:1718881:1719036 [0] NCCL INFO RAS handling connInitAck from 192.168.1.210<45165> (nack 0)
+ganesh-adversarial-network:1718881:1719036 [0] NCCL INFO RAS established connection with 192.168.1.210<45165> (sendQ empty, experiencingDelays 0, startRetryTime 0.00s)
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO NET/Socket : GPU Direct RDMA Disabled for HCA 0 'wlp5s0'
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO NET/Socket : GPU Direct RDMA Disabled for HCA 0 'wlp5s0'
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO ncclTopoPopulateNics : Filled wlp5s0 in topo with pciPath=/sys/devices/pci0000:00/0000:00:01.1/0000:01:00.2/0000:02:05.0/0000:05:00.0 keep=1 coll=(null)
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO ncclTopoPopulateNics : Filled wlp5s0 in topo with pciPath=/sys/devices/pci0000:00/0000:00:01.1/0000:01:00.2/0000:02:05.0/0000:05:00.0 keep=1 coll=(null)
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO Could not get speed from /sys/class/net/tailscale0/speed. Defaulting to 10 Gbps.
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO Could not get speed from /sys/class/net/tailscale0/speed. Defaulting to 10 Gbps.
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO NET/Socket : GPU Direct RDMA Disabled for HCA 0 'wlp5s0'
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO NET/Socket : GPU Direct RDMA Disabled for HCA 0 'wlp5s0'
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO NET/Socket : GPU Direct RDMA Disabled for HCA 1 'tailscale0'
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO NET/Socket : GPU Direct RDMA Disabled for HCA 1 'tailscale0'
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO ncclTopoPopulateNics : Filled wlp5s0 in topo with pciPath=/sys/devices/pci0000:00/0000:00:01.1/0000:01:00.2/0000:02:05.0/0000:05:00.0 keep=1 coll=(null)
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO ncclTopoPopulateNics : Filled wlp5s0 in topo with pciPath=/sys/devices/pci0000:00/0000:00:01.1/0000:01:00.2/0000:02:05.0/0000:05:00.0 keep=1 coll=(null)
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO ncclTopoPopulateNics : Filled tailscale0 in topo with pciPath=(null) keep=1 coll=(null)
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO ncclTopoPopulateNics : Filled tailscale0 in topo with pciPath=(null) keep=1 coll=(null)
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO Could not get speed from /sys/class/net/tailscale0/speed. Defaulting to 10 Gbps.
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO Could not get speed from /sys/class/net/tailscale0/speed. Defaulting to 10 Gbps.
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO NET/Socket : GPU Direct RDMA Disabled for HCA 1 'tailscale0'
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO ncclTopoPopulateNics : Filled tailscale0 in topo with pciPath=(null) keep=1 coll=(null)
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO NET/Socket : GPU Direct RDMA Disabled for HCA 1 'tailscale0'
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO ncclTopoPopulateNics : Filled tailscale0 in topo with pciPath=(null) keep=1 coll=(null)
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO === System : maxBw 12.0 totalBw 12.0 ===
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO CPU/0-0 (1/2/-1)
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO + PCI[5000.0] - NIC/0-0
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO + SYS[16.0] - CPU/0-1
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO + PCI[12.0] - GPU/0-9000 (1)
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO + PCI[6.0] - GPU/0-8000 (0)
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO + PCI[3.0] - PCI/0-1002 (102243b11b210201)
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO              + PCI[0.2] - NIC/0-5000
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO CPU/0-1 (1/2/-1)
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO + SYS[16.0] - CPU/0-0
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO + PCI[12.0] - GPU/0-43000 (3)
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO + PCI[6.0] - GPU/0-42000 (2)
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO ==========================================
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO GPU/0-8000 :GPU/0-8000 (0/5000.0/LOC) GPU/0-9000 (2/6.0/PHB) GPU/0-42000 (3/6.0/SYS) GPU/0-43000 (3/6.0/SYS) CPU/0-0 (1/6.0/PHB) CPU/0-1 (2/6.0/SYS) 
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO GPU/0-9000 :GPU/0-8000 (2/6.0/PHB) GPU/0-9000 (0/5000.0/LOC) GPU/0-42000 (3/6.0/SYS) GPU/0-43000 (3/12.0/SYS) CPU/0-0 (1/12.0/PHB) CPU/0-1 (2/12.0/SYS) 
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO GPU/0-42000 :GPU/0-8000 (3/6.0/SYS) GPU/0-9000 (3/6.0/SYS) GPU/0-42000 (0/5000.0/LOC) GPU/0-43000 (2/6.0/PHB) CPU/0-0 (2/6.0/SYS) CPU/0-1 (1/6.0/PHB) 
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO GPU/0-43000 :GPU/0-8000 (3/6.0/SYS) GPU/0-9000 (3/12.0/SYS) GPU/0-42000 (2/6.0/PHB) GPU/0-43000 (0/5000.0/LOC) CPU/0-0 (2/12.0/SYS) CPU/0-1 (1/12.0/PHB) 
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO Setting affinity for GPU 2 to fc0fc0
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO NVLS multicast support is not available on dev 2
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO === System : maxBw 12.0 totalBw 12.0 ===
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO CPU/0-0 (1/2/-1)
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO + PCI[5000.0] - NIC/0-0
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO + SYS[16.0] - CPU/0-1
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO + PCI[12.0] - GPU/0-9000 (1)
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO + PCI[6.0] - GPU/0-8000 (0)
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO + PCI[3.0] - PCI/0-1002 (102243b11b210201)
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO              + PCI[0.2] - NIC/0-5000
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO CPU/0-1 (1/2/-1)
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO + SYS[16.0] - CPU/0-0
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO + PCI[12.0] - GPU/0-43000 (3)
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO + PCI[6.0] - GPU/0-42000 (2)
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO ==========================================
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO GPU/0-8000 :GPU/0-8000 (0/5000.0/LOC) GPU/0-9000 (2/6.0/PHB) GPU/0-42000 (3/6.0/SYS) GPU/0-43000 (3/6.0/SYS) CPU/0-0 (1/6.0/PHB) CPU/0-1 (2/6.0/SYS) 
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO GPU/0-9000 :GPU/0-8000 (2/6.0/PHB) GPU/0-9000 (0/5000.0/LOC) GPU/0-42000 (3/6.0/SYS) GPU/0-43000 (3/12.0/SYS) CPU/0-0 (1/12.0/PHB) CPU/0-1 (2/12.0/SYS) 
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO GPU/0-42000 :GPU/0-8000 (3/6.0/SYS) GPU/0-9000 (3/6.0/SYS) GPU/0-42000 (0/5000.0/LOC) GPU/0-43000 (2/6.0/PHB) CPU/0-0 (2/6.0/SYS) CPU/0-1 (1/6.0/PHB) 
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO GPU/0-43000 :GPU/0-8000 (3/6.0/SYS) GPU/0-9000 (3/12.0/SYS) GPU/0-42000 (2/6.0/PHB) GPU/0-43000 (0/5000.0/LOC) CPU/0-0 (2/12.0/SYS) CPU/0-1 (1/12.0/PHB) 
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO Setting affinity for GPU 0 to 03f03f
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO Pattern 4, crossNic 0, nChannels 1, bw 6.000000/6.000000, type SYS/PIX, sameChannels 1
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO NVLS multicast support is not available on dev 0
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO  0 : GPU/0 GPU/1 GPU/2 GPU/3
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO Pattern 1, crossNic 0, nChannels 1, bw 6.000000/6.000000, type SYS/PIX, sameChannels 1
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO  0 : GPU/0 GPU/1 GPU/2 GPU/3
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO Pattern 4, crossNic 0, nChannels 1, bw 6.000000/6.000000, type SYS/PIX, sameChannels 1
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO  0 : GPU/0 GPU/1 GPU/2 GPU/3
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO Pattern 1, crossNic 0, nChannels 1, bw 6.000000/6.000000, type SYS/PIX, sameChannels 1
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO  0 : GPU/0 GPU/1 GPU/2 GPU/3
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO === System : maxBw 12.0 totalBw 12.0 ===
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO CPU/0-0 (1/2/-1)
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO + PCI[5000.0] - NIC/0-0
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO + SYS[16.0] - CPU/0-1
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO + PCI[12.0] - GPU/0-9000 (1)
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO + PCI[6.0] - GPU/0-8000 (0)
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO + PCI[3.0] - PCI/0-1002 (102243b11b210201)
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO              + PCI[0.2] - NIC/0-5000
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO CPU/0-1 (1/2/-1)
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO + SYS[16.0] - CPU/0-0
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO + PCI[12.0] - GPU/0-43000 (3)
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO + PCI[6.0] - GPU/0-42000 (2)
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO ==========================================
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO GPU/0-8000 :GPU/0-8000 (0/5000.0/LOC) GPU/0-9000 (2/6.0/PHB) GPU/0-42000 (3/6.0/SYS) GPU/0-43000 (3/6.0/SYS) CPU/0-0 (1/6.0/PHB) CPU/0-1 (2/6.0/SYS) 
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO GPU/0-9000 :GPU/0-8000 (2/6.0/PHB) GPU/0-9000 (0/5000.0/LOC) GPU/0-42000 (3/6.0/SYS) GPU/0-43000 (3/12.0/SYS) CPU/0-0 (1/12.0/PHB) CPU/0-1 (2/12.0/SYS) 
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO GPU/0-42000 :GPU/0-8000 (3/6.0/SYS) GPU/0-9000 (3/6.0/SYS) GPU/0-42000 (0/5000.0/LOC) GPU/0-43000 (2/6.0/PHB) CPU/0-0 (2/6.0/SYS) CPU/0-1 (1/6.0/PHB) 
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO GPU/0-43000 :GPU/0-8000 (3/6.0/SYS) GPU/0-9000 (3/12.0/SYS) GPU/0-42000 (2/6.0/PHB) GPU/0-43000 (0/5000.0/LOC) CPU/0-0 (2/12.0/SYS) CPU/0-1 (1/12.0/PHB) 
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO Setting affinity for GPU 1 to 03f03f
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO NVLS multicast support is not available on dev 1
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO Pattern 4, crossNic 0, nChannels 1, bw 6.000000/6.000000, type SYS/PIX, sameChannels 1
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO  0 : GPU/0 GPU/1 GPU/2 GPU/3
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO Pattern 1, crossNic 0, nChannels 1, bw 6.000000/6.000000, type SYS/PIX, sameChannels 1
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO  0 : GPU/0 GPU/1 GPU/2 GPU/3
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO === System : maxBw 12.0 totalBw 12.0 ===
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO CPU/0-0 (1/2/-1)
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO + PCI[5000.0] - NIC/0-0
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO + SYS[16.0] - CPU/0-1
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO + PCI[12.0] - GPU/0-9000 (1)
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO + PCI[6.0] - GPU/0-8000 (0)
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO + PCI[3.0] - PCI/0-1002 (102243b11b210201)
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO              + PCI[0.2] - NIC/0-5000
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO CPU/0-1 (1/2/-1)
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO + SYS[16.0] - CPU/0-0
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO + PCI[12.0] - GPU/0-43000 (3)
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO + PCI[6.0] - GPU/0-42000 (2)
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO ==========================================
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO GPU/0-8000 :GPU/0-8000 (0/5000.0/LOC) GPU/0-9000 (2/6.0/PHB) GPU/0-42000 (3/6.0/SYS) GPU/0-43000 (3/6.0/SYS) CPU/0-0 (1/6.0/PHB) CPU/0-1 (2/6.0/SYS) 
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO GPU/0-9000 :GPU/0-8000 (2/6.0/PHB) GPU/0-9000 (0/5000.0/LOC) GPU/0-42000 (3/6.0/SYS) GPU/0-43000 (3/12.0/SYS) CPU/0-0 (1/12.0/PHB) CPU/0-1 (2/12.0/SYS) 
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO GPU/0-42000 :GPU/0-8000 (3/6.0/SYS) GPU/0-9000 (3/6.0/SYS) GPU/0-42000 (0/5000.0/LOC) GPU/0-43000 (2/6.0/PHB) CPU/0-0 (2/6.0/SYS) CPU/0-1 (1/6.0/PHB) 
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO GPU/0-43000 :GPU/0-8000 (3/6.0/SYS) GPU/0-9000 (3/12.0/SYS) GPU/0-42000 (2/6.0/PHB) GPU/0-43000 (0/5000.0/LOC) CPU/0-0 (2/12.0/SYS) CPU/0-1 (1/12.0/PHB) 
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO Setting affinity for GPU 3 to fc0fc0
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO NVLS multicast support is not available on dev 3
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO Pattern 4, crossNic 0, nChannels 1, bw 6.000000/6.000000, type SYS/PIX, sameChannels 1
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO  0 : GPU/0 GPU/1 GPU/2 GPU/3
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO Pattern 1, crossNic 0, nChannels 1, bw 6.000000/6.000000, type SYS/PIX, sameChannels 1
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO  0 : GPU/0 GPU/1 GPU/2 GPU/3
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO comm 0x224c6ea0 rank 3 nRanks 4 nNodes 1 localRanks 4 localRank 3 MNNVL 0
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO comm 0x44ac7a70 rank 1 nRanks 4 nNodes 1 localRanks 4 localRank 1 MNNVL 0
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO comm 0x1e9e8b70 rank 0 nRanks 4 nNodes 1 localRanks 4 localRank 0 MNNVL 0
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO comm 0x3fc4c590 rank 2 nRanks 4 nNodes 1 localRanks 4 localRank 2 MNNVL 0
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO Tree 0 : 0 -> 1 -> 2/-1/-1
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO Tree 0 : -1 -> 0 -> 1/-1/-1
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO Ring 00 : 2 -> 3 -> 0
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO Tree 1 : 0 -> 1 -> 2/-1/-1
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO Tree 1 : -1 -> 0 -> 1/-1/-1
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO Ring 00 : 1 -> 2 -> 3
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO Ring 01 : 2 -> 3 -> 0
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO Ring 00 : 0 -> 1 -> 2
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO Ring 01 : 1 -> 2 -> 3
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO Trees [0] -1/-1/-1->3->2 [1] -1/-1/-1->3->2
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO Channel 00/02 : 0 1 2 3
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO Ring 01 : 0 -> 1 -> 2
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO Trees [0] 3/-1/-1->2->1 [1] 3/-1/-1->2->1
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO P2P Chunksize set to 131072
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO Channel 01/02 : 0 1 2 3
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO Trees [0] 2/-1/-1->1->0 [1] 2/-1/-1->1->0
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO P2P Chunksize set to 131072
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO Ring 00 : 3 -> 0 -> 1
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO P2P Chunksize set to 131072
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO Ring 01 : 3 -> 0 -> 1
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO Trees [0] 1/-1/-1->0->-1 [1] 1/-1/-1->0->-1
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO P2P Chunksize set to 131072
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO Check P2P Type intraNodeP2pSupport 0 directMode 0
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO UDS: Creating service thread comm 0x224c6ea0 rank 3
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO UDS: Creating service thread comm 0x3fc4c590 rank 2
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO UDS: Creating service thread comm 0x1e9e8b70 rank 0
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO UDS: Creating service thread comm 0x44ac7a70 rank 1
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO misc/utils.cc:233 memory stack hunk malloc(65536)
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO misc/utils.cc:233 memory stack hunk malloc(65536)
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO misc/utils.cc:233 memory stack hunk malloc(65536)
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO misc/utils.cc:233 memory stack hunk malloc(65536)
+ganesh-adversarial-network:1718879:1719042 [1] NCCL INFO [Proxy Service] Device 1 CPU core 5
+ganesh-adversarial-network:1718878:1719046 [0] NCCL INFO [Proxy Service UDS] Device 0 CPU core 0
+ganesh-adversarial-network:1718878:1719041 [0] NCCL INFO [Proxy Service] Device 0 CPU core 13
+ganesh-adversarial-network:1718879:1719045 [1] NCCL INFO [Proxy Service UDS] Device 1 CPU core 15
+ganesh-adversarial-network:1718881:1719043 [3] NCCL INFO [Proxy Service UDS] Device 3 CPU core 7
+ganesh-adversarial-network:1718881:1719039 [3] NCCL INFO [Proxy Service] Device 3 CPU core 8
+ganesh-adversarial-network:1718880:1719040 [2] NCCL INFO [Proxy Service] Device 2 CPU core 23
+ganesh-adversarial-network:1718880:1719044 [2] NCCL INFO [Proxy Service UDS] Device 2 CPU core 7
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO channel.cc:42 Cuda Alloc Size 2432 pointer 0x759bb6800000
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO channel.cc:42 Cuda Alloc Size 2432 pointer 0x7c7d06800000
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO channel.cc:45 Cuda Alloc Size 72 pointer 0x7c7d06a00000
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO channel.cc:42 Cuda Alloc Size 2432 pointer 0x767d92800000
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO channel.cc:45 Cuda Alloc Size 72 pointer 0x759bb6a00000
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO channel.cc:42 Cuda Alloc Size 2432 pointer 0x771826800000
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO channel.cc:45 Cuda Alloc Size 72 pointer 0x771826a00000
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO channel.cc:56 Cuda Alloc Size 16 pointer 0x759bb6c00000
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO channel.cc:45 Cuda Alloc Size 72 pointer 0x767d92a00000
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO channel.cc:56 Cuda Alloc Size 16 pointer 0x767d92c00000
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO channel.cc:56 Cuda Alloc Size 16 pointer 0x7c7d06c00000
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO channel.cc:56 Cuda Alloc Size 16 pointer 0x771826c00000
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO channel.cc:42 Cuda Alloc Size 2432 pointer 0x759bb6e00000
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO channel.cc:45 Cuda Alloc Size 72 pointer 0x759bb7000000
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO channel.cc:42 Cuda Alloc Size 2432 pointer 0x767d92e00000
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO channel.cc:42 Cuda Alloc Size 2432 pointer 0x771826e00000
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO channel.cc:45 Cuda Alloc Size 72 pointer 0x771827000000
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO channel.cc:42 Cuda Alloc Size 2432 pointer 0x7c7d06e00000
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO channel.cc:45 Cuda Alloc Size 72 pointer 0x767d93000000
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO channel.cc:56 Cuda Alloc Size 16 pointer 0x771827200000
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO threadThresholds 8/8/64 | 32/8/64 | 512 | 512
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO channel.cc:56 Cuda Alloc Size 16 pointer 0x759bb7200000
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO threadThresholds 8/8/64 | 32/8/64 | 512 | 512
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO init.cc:436 Cuda Alloc Size 23648 pointer 0x759bb7400000
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO channel.cc:56 Cuda Alloc Size 16 pointer 0x767d93200000
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO   Algorithm   |                            Tree                  |                            Ring                  |                   CollNetDirect                  |
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO init.cc:436 Cuda Alloc Size 23648 pointer 0x771827400000
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO   Protocol    |             LL |          LL128 |         Simple |             LL |          LL128 |         Simple |             LL |          LL128 |         Simple |
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO  Max NThreads |            512 |            640 |            512 |            512 |            640 |            256 |              0 |              0 |            640 |
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO     Broadcast |     0.0/   0.0 |     0.0/   0.0 |     0.0/   0.0 |     7.6/   3.0 |    16.5/   0.0 |    14.1/   6.0 |     0.0/   0.0 |     0.0/   0.0 |     0.0/   0.0 |
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO        Reduce |     0.0/   0.0 |     0.0/   0.0 |     0.0/   0.0 |     7.6/   3.0 |    16.5/   0.0 |    14.1/   6.0 |     0.0/   0.0 |     0.0/   0.0 |     0.0/   0.0 |
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO     AllGather |     0.0/   0.0 |     0.0/   0.0 |     0.0/   0.0 |     9.6/   4.0 |    21.5/   0.0 |    25.5/   8.0 |     2.4/   0.0 |     2.4/   0.0 |    40.8/   0.0 |
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO channel.cc:45 Cuda Alloc Size 72 pointer 0x7c7d07000000
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO ReduceScatter |     0.0/   0.0 |     0.0/   0.0 |     0.0/   0.0 |     9.6/   4.0 |    21.5/   0.0 |    25.5/   8.0 |     2.4/   0.0 |     2.4/   0.0 |    40.8/   0.0 |
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO     AllReduce |    12.8/   0.7 |    25.4/   0.0 |    32.4/   2.8 |    12.6/   2.0 |    29.0/   0.0 |    42.6/   4.0 |     2.4/   0.0 |     2.4/   0.0 |    40.8/   0.0 |
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO   Algorithm   |                    CollNetChain                  |                            NVLS                  |                        NVLSTree                  |
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO   Protocol    |             LL |          LL128 |         Simple |             LL |          LL128 |         Simple |             LL |          LL128 |         Simple |
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO  Max NThreads |              0 |              0 |            640 |              0 |              0 |            640 |              0 |              0 |            640 |
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO     Broadcast |     0.0/   0.0 |     0.0/   0.0 |     0.0/   0.0 |     0.0/   0.0 |     0.0/   0.0 |     0.0/   0.0 |     0.0/   0.0 |     0.0/   0.0 |     0.0/   0.0 |
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO        Reduce |     0.0/   0.0 |     0.0/   0.0 |     0.0/   0.0 |     0.0/   0.0 |     0.0/   0.0 |     0.0/   0.0 |     0.0/   0.0 |     0.0/   0.0 |     0.0/   0.0 |
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO     AllGather |     0.0/   0.0 |     0.0/   0.0 |     0.0/   0.0 |     0.0/   0.0 |     0.0/   0.0 |     0.0/   0.0 |     0.0/   0.0 |     0.0/   0.0 |     0.0/   0.0 |
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO ReduceScatter |     0.0/   0.0 |     0.0/   0.0 |     0.0/   0.0 |     0.0/   0.0 |     0.0/   0.0 |     0.0/   0.0 |     0.0/   0.0 |     0.0/   0.0 |     0.0/   0.0 |
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO     AllReduce |     0.0/   0.0 |     0.0/   0.0 |    46.8/   0.0 |     0.0/   0.0 |     0.0/   0.0 |     0.0/   0.0 |     0.0/   0.0 |     0.0/   0.0 |     0.0/   0.0 |
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO   Algorithm   |                             PAT                  |
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO   Protocol    |             LL |          LL128 |         Simple |             LL |          LL128 |         Simple |             LL |          LL128 |         Simple |
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO  Max NThreads |              0 |              0 |              0 |
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO     Broadcast |     0.0/   0.0 |     0.0/   0.0 |     0.0/   0.0 |
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO        Reduce |     0.0/   0.0 |     0.0/   0.0 |     0.0/   0.0 |
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO     AllGather |     0.0/   0.0 |     0.0/   0.0 |     0.0/   0.0 |
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO ReduceScatter |     0.0/   0.0 |     0.0/   0.0 |     0.0/   0.0 |
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO     AllReduce |     0.0/   0.0 |     0.0/   0.0 |     0.0/   0.0 |
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO threadThresholds 8/8/64 | 32/8/64 | 512 | 512
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO init.cc:438 Cuda Alloc Size 16 pointer 0x771827600000
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO init.cc:438 Cuda Alloc Size 16 pointer 0x759bb7600000
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO init.cc:436 Cuda Alloc Size 23648 pointer 0x767d93400000
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO channel.cc:56 Cuda Alloc Size 16 pointer 0x7c7d07200000
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO threadThresholds 8/8/64 | 32/8/64 | 512 | 512
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO init.cc:480 Cuda Host Alloc Size 1048576 pointer 0x771867410200
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO init.cc:485 Cuda Host Alloc Size 256 pointer 0x771867510200
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO init.cc:492 Cuda Host Alloc Size 512 pointer 0x771867510400
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO init.cc:493 Cuda Host Alloc Size 512 pointer 0x771867510600
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO init.cc:436 Cuda Alloc Size 23648 pointer 0x7c7d07400000
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO init.cc:438 Cuda Alloc Size 16 pointer 0x767d93600000
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO init.cc:480 Cuda Host Alloc Size 1048576 pointer 0x759bf7410200
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO init.cc:485 Cuda Host Alloc Size 256 pointer 0x759bf7510200
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO init.cc:492 Cuda Host Alloc Size 512 pointer 0x759bf7510400
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO init.cc:493 Cuda Host Alloc Size 512 pointer 0x759bf7510600
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO init.cc:438 Cuda Alloc Size 16 pointer 0x7c7d07600000
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO CC Off, workFifoBytes 1048576
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO init.cc:480 Cuda Host Alloc Size 1048576 pointer 0x767db3410200
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO init.cc:485 Cuda Host Alloc Size 256 pointer 0x767db3510200
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO init.cc:492 Cuda Host Alloc Size 512 pointer 0x767db3510400
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO init.cc:493 Cuda Host Alloc Size 512 pointer 0x767db3510600
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO init.cc:480 Cuda Host Alloc Size 1048576 pointer 0x7c7d43410200
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO init.cc:485 Cuda Host Alloc Size 256 pointer 0x7c7d43510200
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO init.cc:492 Cuda Host Alloc Size 512 pointer 0x7c7d43510400
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO init.cc:493 Cuda Host Alloc Size 512 pointer 0x7c7d43510600
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO TUNER/Plugin: Could not find: libnccl-tuner.so. Using internal tuner plugin.
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO ncclCommInitRankConfig comm 0x44ac7a70 rank 1 nranks 4 cudaDev 1 nvmlDev 1 busId 9000 commId 0xc54f816bb76d83cc - Init COMPLETE
+ganesh-adversarial-network:1718879:1719029 [1] NCCL INFO Init timings - ncclCommInitRankConfig: rank 1 nranks 4 total 0.28 (kernels 0.10, alloc 0.00, bootstrap 0.16, allgathers 0.00, topo 0.02, graphs 0.00, connections 0.00, rest 0.00)
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO TUNER/Plugin: Could not find: libnccl-tuner.so. Using internal tuner plugin.
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO ncclCommInitRankConfig comm 0x1e9e8b70 rank 0 nranks 4 cudaDev 0 nvmlDev 0 busId 8000 commId 0xc54f816bb76d83cc - Init COMPLETE
+ganesh-adversarial-network:1718878:1719027 [0] NCCL INFO Init timings - ncclCommInitRankConfig: rank 0 nranks 4 total 0.34 (kernels 0.10, alloc 0.00, bootstrap 0.22, allgathers 0.00, topo 0.01, graphs 0.00, connections 0.00, rest 0.00)
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO TUNER/Plugin: Could not find: libnccl-tuner.so. Using internal tuner plugin.
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO TUNER/Plugin: Could not find: libnccl-tuner.so. Using internal tuner plugin.
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO ncclCommInitRankConfig comm 0x224c6ea0 rank 3 nranks 4 cudaDev 3 nvmlDev 3 busId 43000 commId 0xc54f816bb76d83cc - Init COMPLETE
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO ncclCommInitRankConfig comm 0x3fc4c590 rank 2 nranks 4 cudaDev 2 nvmlDev 2 busId 42000 commId 0xc54f816bb76d83cc - Init COMPLETE
+ganesh-adversarial-network:1718880:1719031 [2] NCCL INFO Init timings - ncclCommInitRankConfig: rank 2 nranks 4 total 0.13 (kernels 0.10, alloc 0.00, bootstrap 0.00, allgathers 0.00, topo 0.01, graphs 0.00, connections 0.00, rest 0.00)
+ganesh-adversarial-network:1718881:1719028 [3] NCCL INFO Init timings - ncclCommInitRankConfig: rank 3 nranks 4 total 0.34 (kernels 0.11, alloc 0.00, bootstrap 0.20, allgathers 0.00, topo 0.02, graphs 0.00, connections 0.00, rest 0.00)
+ganesh-adversarial-network:1718878:1718878 [0] NCCL INFO AllGather: opCount 0 sendbuff 0x767d80000000 recvbuff 0x767d80000000 count 19397952 datatype 7 op 0 root 0 comm 0x1e9e8b70 [nranks=4] stream 0x21f265c0
+ganesh-adversarial-network:1718878:1718878 [0] NCCL INFO misc/utils.cc:233 memory stack hunk malloc(65536)
+ganesh-adversarial-network:1718879:1718879 [1] NCCL INFO AllGather: opCount 0 sendbuff 0x7718189ff500 recvbuff 0x771814000000 count 19397952 datatype 7 op 0 root 0 comm 0x44ac7a70 [nranks=4] stream 0x47b95cd0
+ganesh-adversarial-network:1718879:1718879 [1] NCCL INFO misc/utils.cc:233 memory stack hunk malloc(65536)
+ganesh-adversarial-network:1718881:1718881 [3] NCCL INFO AllGather: opCount 0 sendbuff 0x759bb1dfdf00 recvbuff 0x759ba4000000 count 19397952 datatype 7 op 0 root 0 comm 0x224c6ea0 [nranks=4] stream 0x2578e560
+ganesh-adversarial-network:1718881:1718881 [3] NCCL INFO misc/utils.cc:233 memory stack hunk malloc(65536)
+ganesh-adversarial-network:1718880:1718880 [2] NCCL INFO AllGather: opCount 0 sendbuff 0x7c7cfd3fea00 recvbuff 0x7c7cf4000000 count 19397952 datatype 7 op 0 root 0 comm 0x3fc4c590 [nranks=4] stream 0x42d1a630
+ganesh-adversarial-network:1718880:1718880 [2] NCCL INFO misc/utils.cc:233 memory stack hunk malloc(65536)
+ganesh-adversarial-network:1718879:1719042 [1] NCCL INFO Mem Realloc old size 0, new size 8 pointer 0x77182c077230
+ganesh-adversarial-network:1718879:1719042 [1] NCCL INFO New proxy recv connection 0 from local rank 1, transport 1
+ganesh-adversarial-network:1718879:1719042 [1] NCCL INFO proxyProgressAsync opId=0x7718569de710 op.type=1 op.reqBuff=0x77182c00cb30 op.respSize=16 done
+ganesh-adversarial-network:1718879:1719048 [1] NCCL INFO ncclPollProxyResponse Received new opId=0x7718569de710
+ganesh-adversarial-network:1718879:1719048 [1] NCCL INFO resp.opId=0x7718569de710 matches expected opId=0x7718569de710
+ganesh-adversarial-network:1718879:1719042 [1] NCCL INFO Received and initiated operation=Init res=0
+ganesh-adversarial-network:1718879:1719048 [1] NCCL INFO Connected to proxy localRank 1 -> connection 0x77182c016f30
+ganesh-adversarial-network:1718881:1719039 [3] NCCL INFO Mem Realloc old size 0, new size 8 pointer 0x759bc8076ad0
+ganesh-adversarial-network:1718878:1719041 [0] NCCL INFO Mem Realloc old size 0, new size 8 pointer 0x767d9c077070
+ganesh-adversarial-network:1718881:1719039 [3] NCCL INFO New proxy recv connection 0 from local rank 3, transport 1
+ganesh-adversarial-network:1718878:1719041 [0] NCCL INFO New proxy recv connection 0 from local rank 0, transport 1
+ganesh-adversarial-network:1718881:1719039 [3] NCCL INFO proxyProgressAsync opId=0x759bc69b24b0 op.type=1 op.reqBuff=0x759bc800c5f0 op.respSize=16 done
+ganesh-adversarial-network:1718878:1719041 [0] NCCL INFO proxyProgressAsync opId=0x767dc69c7bf0 op.type=1 op.reqBuff=0x767d9c00cbb0 op.respSize=16 done
+ganesh-adversarial-network:1718878:1719047 [0] NCCL INFO ncclPollProxyResponse Received new opId=0x767dc69c7bf0
+ganesh-adversarial-network:1718880:1719040 [2] NCCL INFO Mem Realloc old size 0, new size 8 pointer 0x7c7d10077070
+ganesh-adversarial-network:1718881:1719049 [3] NCCL INFO ncclPollProxyResponse Received new opId=0x759bc69b24b0
+ganesh-adversarial-network:1718880:1719040 [2] NCCL INFO New proxy recv connection 0 from local rank 2, transport 1
+ganesh-adversarial-network:1718878:1719047 [0] NCCL INFO resp.opId=0x767dc69c7bf0 matches expected opId=0x767dc69c7bf0
+ganesh-adversarial-network:1718881:1719049 [3] NCCL INFO resp.opId=0x759bc69b24b0 matches expected opId=0x759bc69b24b0
+ganesh-adversarial-network:1718880:1719040 [2] NCCL INFO proxyProgressAsync opId=0x7c7d2e9c7bf0 op.type=1 op.reqBuff=0x7c7d1000cb70 op.respSize=16 done
+ganesh-adversarial-network:1718878:1719047 [0] NCCL INFO Connected to proxy localRank 0 -> connection 0x767d9c017070
+ganesh-adversarial-network:1718881:1719049 [3] NCCL INFO Connected to proxy localRank 3 -> connection 0x759bc8016ab0
+ganesh-adversarial-network:1718878:1719041 [0] NCCL INFO Received and initiated operation=Init res=0
+ganesh-adversarial-network:1718881:1719039 [3] NCCL INFO Received and initiated operation=Init res=0
+ganesh-adversarial-network:1718880:1719050 [2] NCCL INFO ncclPollProxyResponse Received new opId=0x7c7d2e9c7bf0
+ganesh-adversarial-network:1718880:1719040 [2] NCCL INFO Received and initiated operation=Init res=0
+ganesh-adversarial-network:1718880:1719050 [2] NCCL INFO resp.opId=0x7c7d2e9c7bf0 matches expected opId=0x7c7d2e9c7bf0
+ganesh-adversarial-network:1718880:1719050 [2] NCCL INFO Connected to proxy localRank 2 -> connection 0x7c7d10017030
+
+[2025-07-06 11:04:12] ganesh-adversarial-network:1718881:1719039 [3] include/alloc.h:56 NCCL WARN Cuda failure 2 'out of memory'
+ganesh-adversarial-network:1718881:1719039 [3] NCCL INFO transport/shm.cc:534 -> 1
+ganesh-adversarial-network:1718881:1719039 [3] NCCL INFO transport/shm.cc:491 -> 1
+ganesh-adversarial-network:1718881:1719039 [3] NCCL INFO proxyProgressAsync opId=0x759bc69b24b0 op.type=3 op.reqBuff=0x759bc80148a0 op.respSize=112 done
+ganesh-adversarial-network:1718881:1719049 [3] NCCL INFO ncclPollProxyResponse Received new opId=0x759bc69b24b0
+ganesh-adversarial-network:1718881:1719039 [3] NCCL INFO Received and initiated operation=Setup res=0
+ganesh-adversarial-network:1718881:1719049 [3] NCCL INFO resp.opId=0x759bc69b24b0 matches expected opId=0x759bc69b24b0
+ganesh-adversarial-network:1718881:1719049 [3] NCCL INFO transport/shm.cc:153 -> 1
+ganesh-adversarial-network:1718881:1719049 [3] NCCL INFO transport.cc:35 -> 1
+ganesh-adversarial-network:1718881:1719049 [3] NCCL INFO transport.cc:147 -> 1
+ganesh-adversarial-network:1718881:1719049 [3] NCCL INFO transport/generic.cc:19 -> 1
+ganesh-adversarial-network:1718881:1719049 [3] NCCL INFO group.cc:148 -> 1
+ganesh-adversarial-network:1718881:1719049 [3] NCCL INFO group.cc:75 -> 1 [Async thread]
+ganesh-adversarial-network:1718881:1718881 [3] NCCL INFO group.cc:460 -> 1
+ganesh-adversarial-network:1718881:1718881 [3] NCCL INFO group.cc:581 -> 1
+ganesh-adversarial-network:1718881:1718881 [3] NCCL INFO enqueue.cc:2299 -> 1
+
+[2025-07-06 11:04:12] ganesh-adversarial-network:1718880:1719040 [2] include/alloc.h:56 NCCL WARN Cuda failure 2 'out of memory'
+ganesh-adversarial-network:1718880:1719040 [2] NCCL INFO transport/shm.cc:534 -> 1
+ganesh-adversarial-network:1718880:1719040 [2] NCCL INFO transport/shm.cc:491 -> 1
+ganesh-adversarial-network:1718880:1719040 [2] NCCL INFO proxyProgressAsync opId=0x7c7d2e9c7bf0 op.type=3 op.reqBuff=0x7c7d10014e20 op.respSize=112 done
+ganesh-adversarial-network:1718880:1719050 [2] NCCL INFO ncclPollProxyResponse Received new opId=0x7c7d2e9c7bf0
+ganesh-adversarial-network:1718880:1719040 [2] NCCL INFO Received and initiated operation=Setup res=0
+ganesh-adversarial-network:1718880:1719050 [2] NCCL INFO resp.opId=0x7c7d2e9c7bf0 matches expected opId=0x7c7d2e9c7bf0
+ganesh-adversarial-network:1718880:1719050 [2] NCCL INFO transport/shm.cc:153 -> 1
+ganesh-adversarial-network:1718880:1719050 [2] NCCL INFO transport.cc:35 -> 1
+ganesh-adversarial-network:1718880:1719050 [2] NCCL INFO transport.cc:147 -> 1
+ganesh-adversarial-network:1718880:1719050 [2] NCCL INFO transport/generic.cc:19 -> 1
+ganesh-adversarial-network:1718880:1719050 [2] NCCL INFO group.cc:148 -> 1
+ganesh-adversarial-network:1718880:1719050 [2] NCCL INFO group.cc:75 -> 1 [Async thread]
+ganesh-adversarial-network:1718880:1718880 [2] NCCL INFO group.cc:460 -> 1
+ganesh-adversarial-network:1718880:1718880 [2] NCCL INFO group.cc:581 -> 1
+ganesh-adversarial-network:1718880:1718880 [2] NCCL INFO enqueue.cc:2299 -> 1
+ganesh-adversarial-network:1718879:1719042 [1] NCCL INFO CUMEM Host Alloc Size 10485760 pointer 0x77182a600000 handle 77182c014e40 numa 0 dev 1 granularity 2097152
+ganesh-adversarial-network:1718879:1719042 [1] NCCL INFO CUMEM allocated shareable buffer 0x77182a600000 size 9637888
+ganesh-adversarial-network:1718879:1719042 [1] NCCL INFO proxyProgressAsync opId=0x7718569de710 op.type=3 op.reqBuff=0x77182c00b160 op.respSize=112 done
+ganesh-adversarial-network:1718879:1719048 [1] NCCL INFO ncclPollProxyResponse Received new opId=0x7718569de710
+ganesh-adversarial-network:1718879:1719042 [1] NCCL INFO Received and initiated operation=Setup res=0
+ganesh-adversarial-network:1718879:1719048 [1] NCCL INFO resp.opId=0x7718569de710 matches expected opId=0x7718569de710
+ganesh-adversarial-network:1718879:1719042 [1] NCCL INFO New proxy recv connection 1 from local rank 1, transport 1
+ganesh-adversarial-network:1718879:1719042 [1] NCCL INFO proxyProgressAsync opId=0x7718569de710 op.type=1 op.reqBuff=0x77182c010b50 op.respSize=16 done
+ganesh-adversarial-network:1718879:1719048 [1] NCCL INFO ncclPollProxyResponse Received new opId=0x7718569de710
+ganesh-adversarial-network:1718879:1719042 [1] NCCL INFO Received and initiated operation=Init res=0
+ganesh-adversarial-network:1718879:1719048 [1] NCCL INFO resp.opId=0x7718569de710 matches expected opId=0x7718569de710
+ganesh-adversarial-network:1718879:1719048 [1] NCCL INFO Connected to proxy localRank 1 -> connection 0x77182c016fa8
+ganesh-adversarial-network:1718878:1719041 [0] NCCL INFO CUMEM Host Alloc Size 10485760 pointer 0x767d96600000 handle 767d9c00e8f0 numa 0 dev 0 granularity 2097152
+ganesh-adversarial-network:1718878:1719041 [0] NCCL INFO CUMEM allocated shareable buffer 0x767d96600000 size 9637888
+ganesh-adversarial-network:1718878:1719041 [0] NCCL INFO proxyProgressAsync opId=0x767dc69c7bf0 op.type=3 op.reqBuff=0x767d9c014e60 op.respSize=112 done
+ganesh-adversarial-network:1718878:1719047 [0] NCCL INFO ncclPollProxyResponse Received new opId=0x767dc69c7bf0
+ganesh-adversarial-network:1718878:1719041 [0] NCCL INFO Received and initiated operation=Setup res=0
+ganesh-adversarial-network:1718878:1719047 [0] NCCL INFO resp.opId=0x767dc69c7bf0 matches expected opId=0x767dc69c7bf0
+ganesh-adversarial-network:1718878:1719041 [0] NCCL INFO New proxy recv connection 1 from local rank 0, transport 1
+ganesh-adversarial-network:1718878:1719041 [0] NCCL INFO proxyProgressAsync opId=0x767dc69c7bf0 op.type=1 op.reqBuff=0x767d9c014e60 op.respSize=16 done
+ganesh-adversarial-network:1718878:1719047 [0] NCCL INFO ncclPollProxyResponse Received new opId=0x767dc69c7bf0
+ganesh-adversarial-network:1718878:1719041 [0] NCCL INFO Received and initiated operation=Init res=0
+ganesh-adversarial-network:1718878:1719047 [0] NCCL INFO resp.opId=0x767dc69c7bf0 matches expected opId=0x767dc69c7bf0
+ganesh-adversarial-network:1718878:1719047 [0] NCCL INFO Connected to proxy localRank 0 -> connection 0x767d9c0170e8
+Dumping memory snapshot at profiling_data/snapshot_3.pkl
+Dumping memory snapshot at profiling_data/snapshot_2.pkl
+ganesh-adversarial-network:1718878:1719041 [0] NCCL INFO CUMEM Host Alloc Size 10485760 pointer 0x767d97000000 handle 767d9c0167b0 numa 0 dev 0 granularity 2097152
+ganesh-adversarial-network:1718878:1719041 [0] NCCL INFO CUMEM allocated shareable buffer 0x767d97000000 size 9637888
+ganesh-adversarial-network:1718878:1719041 [0] NCCL INFO proxyProgressAsync opId=0x767dc69c7bf0 op.type=3 op.reqBuff=0x767d9c00e280 op.respSize=112 done
+ganesh-adversarial-network:1718879:1719042 [1] NCCL INFO CUMEM Host Alloc Size 10485760 pointer 0x77182b000000 handle 77182c002d30 numa 0 dev 1 granularity 2097152
+ganesh-adversarial-network:1718879:1719042 [1] NCCL INFO CUMEM allocated shareable buffer 0x77182b000000 size 9637888
+ganesh-adversarial-network:1718879:1719042 [1] NCCL INFO proxyProgressAsync opId=0x7718569de710 op.type=3 op.reqBuff=0x77182c010b50 op.respSize=112 done
+ganesh-adversarial-network:1718878:1719047 [0] NCCL INFO ncclPollProxyResponse Received new opId=0x767dc69c7bf0
+ganesh-adversarial-network:1718878:1719041 [0] NCCL INFO Received and initiated operation=Setup res=0
+ganesh-adversarial-network:1718878:1719047 [0] NCCL INFO resp.opId=0x767dc69c7bf0 matches expected opId=0x767dc69c7bf0
+ganesh-adversarial-network:1718879:1719048 [1] NCCL INFO ncclPollProxyResponse Received new opId=0x7718569de710
+ganesh-adversarial-network:1718879:1719042 [1] NCCL INFO Received and initiated operation=Setup res=0
+ganesh-adversarial-network:1718879:1719048 [1] NCCL INFO resp.opId=0x7718569de710 matches expected opId=0x7718569de710
+ganesh-adversarial-network:1718878:1719041 [0] NCCL INFO New proxy send connection 2 from local rank 0, transport 1
+ganesh-adversarial-network:1718878:1719041 [0] NCCL INFO proxyProgressAsync opId=0x767dc69c7bf0 op.type=1 op.reqBuff=0x767d9c00e280 op.respSize=16 done
+ganesh-adversarial-network:1718878:1719047 [0] NCCL INFO ncclPollProxyResponse Received new opId=0x767dc69c7bf0
+ganesh-adversarial-network:1718878:1719041 [0] NCCL INFO Received and initiated operation=Init res=0
+ganesh-adversarial-network:1718879:1719042 [1] NCCL INFO New proxy send connection 2 from local rank 1, transport 1
+ganesh-adversarial-network:1718878:1719047 [0] NCCL INFO resp.opId=0x767dc69c7bf0 matches expected opId=0x767dc69c7bf0
+ganesh-adversarial-network:1718879:1719042 [1] NCCL INFO proxyProgressAsync opId=0x7718569de710 op.type=1 op.reqBuff=0x77182c010b50 op.respSize=16 done
+ganesh-adversarial-network:1718878:1719047 [0] NCCL INFO Connected to proxy localRank 0 -> connection 0x767d9c017160
+ganesh-adversarial-network:1718879:1719048 [1] NCCL INFO ncclPollProxyResponse Received new opId=0x7718569de710
+ganesh-adversarial-network:1718879:1719042 [1] NCCL INFO Received and initiated operation=Init res=0
+ganesh-adversarial-network:1718879:1719048 [1] NCCL INFO resp.opId=0x7718569de710 matches expected opId=0x7718569de710
+ganesh-adversarial-network:1718879:1719048 [1] NCCL INFO Connected to proxy localRank 1 -> connection 0x77182c017020
+ganesh-adversarial-network:1718878:1719041 [0] NCCL INFO CUMEM Host Alloc Size 2097152 pointer 0x767d93800000 handle 767d9c015a90 numa 0 dev 0 granularity 2097152
+ganesh-adversarial-network:1718878:1719041 [0] NCCL INFO CUMEM allocated shareable buffer 0x767d93800000 size 4096
+ganesh-adversarial-network:1718878:1719041 [0] NCCL INFO proxyProgressAsync opId=0x767dc69c7bf0 op.type=3 op.reqBuff=0x767d9c015f50 op.respSize=112 done
+ganesh-adversarial-network:1718879:1719042 [1] NCCL INFO CUMEM Host Alloc Size 2097152 pointer 0x771827800000 handle 77182c00cc10 numa 0 dev 1 granularity 2097152
+ganesh-adversarial-network:1718879:1719042 [1] NCCL INFO CUMEM allocated shareable buffer 0x771827800000 size 4096
+ganesh-adversarial-network:1718879:1719042 [1] NCCL INFO proxyProgressAsync opId=0x7718569de710 op.type=3 op.reqBuff=0x77182c010b50 op.respSize=112 done
+ganesh-adversarial-network:1718878:1719047 [0] NCCL INFO ncclPollProxyResponse Received new opId=0x767dc69c7bf0
+ganesh-adversarial-network:1718878:1719041 [0] NCCL INFO Received and initiated operation=Setup res=0
+ganesh-adversarial-network:1718879:1719048 [1] NCCL INFO ncclPollProxyResponse Received new opId=0x7718569de710
+ganesh-adversarial-network:1718878:1719047 [0] NCCL INFO resp.opId=0x767dc69c7bf0 matches expected opId=0x767dc69c7bf0
+ganesh-adversarial-network:1718879:1719042 [1] NCCL INFO Received and initiated operation=Setup res=0
+ganesh-adversarial-network:1718878:1719047 [0] NCCL INFO Channel 00 : 0[0] -> 1[1] via SHM/direct/direct
+ganesh-adversarial-network:1718879:1719048 [1] NCCL INFO resp.opId=0x7718569de710 matches expected opId=0x7718569de710
+ganesh-adversarial-network:1718879:1719048 [1] NCCL INFO Channel 00 : 1[1] -> 2[2] via SHM/direct/direct
+ganesh-adversarial-network:1718879:1719042 [1] NCCL INFO New proxy send connection 3 from local rank 1, transport 1
+ganesh-adversarial-network:1718879:1719042 [1] NCCL INFO proxyProgressAsync opId=0x7718569de710 op.type=1 op.reqBuff=0x77182c010b50 op.respSize=16 done
+ganesh-adversarial-network:1718878:1719041 [0] NCCL INFO New proxy send connection 3 from local rank 0, transport 1
+ganesh-adversarial-network:1718878:1719041 [0] NCCL INFO proxyProgressAsync opId=0x767dc69c7bf0 op.type=1 op.reqBuff=0x767d9c015f50 op.respSize=16 done
+ganesh-adversarial-network:1718879:1719048 [1] NCCL INFO ncclPollProxyResponse Received new opId=0x7718569de710
+ganesh-adversarial-network:1718879:1719042 [1] NCCL INFO Received and initiated operation=Init res=0
+ganesh-adversarial-network:1718878:1719047 [0] NCCL INFO ncclPollProxyResponse Received new opId=0x767dc69c7bf0
+ganesh-adversarial-network:1718879:1719048 [1] NCCL INFO resp.opId=0x7718569de710 matches expected opId=0x7718569de710
+ganesh-adversarial-network:1718878:1719041 [0] NCCL INFO Received and initiated operation=Init res=0
+ganesh-adversarial-network:1718879:1719048 [1] NCCL INFO Connected to proxy localRank 1 -> connection 0x77182c017098
+ganesh-adversarial-network:1718878:1719047 [0] NCCL INFO resp.opId=0x767dc69c7bf0 matches expected opId=0x767dc69c7bf0
+ganesh-adversarial-network:1718878:1719047 [0] NCCL INFO Connected to proxy localRank 0 -> connection 0x767d9c0171d8
+ganesh-adversarial-network:1718879:1719042 [1] NCCL INFO CUMEM Host Alloc Size 2097152 pointer 0x771827a00000 handle 77182c01b1e0 numa 0 dev 1 granularity 2097152
+ganesh-adversarial-network:1718878:1719041 [0] NCCL INFO CUMEM Host Alloc Size 2097152 pointer 0x767d93a00000 handle 767d9c01b390 numa 0 dev 0 granularity 2097152
+ganesh-adversarial-network:1718879:1719042 [1] NCCL INFO CUMEM allocated shareable buffer 0x771827a00000 size 4096
+ganesh-adversarial-network:1718878:1719041 [0] NCCL INFO CUMEM allocated shareable buffer 0x767d93a00000 size 4096
+ganesh-adversarial-network:1718879:1719042 [1] NCCL INFO proxyProgressAsync opId=0x7718569de710 op.type=3 op.reqBuff=0x77182c01b140 op.respSize=112 done
+ganesh-adversarial-network:1718878:1719041 [0] NCCL INFO proxyProgressAsync opId=0x767dc69c7bf0 op.type=3 op.reqBuff=0x767d9c01b370 op.respSize=112 done
+ganesh-adversarial-network:1718879:1719048 [1] NCCL INFO ncclPollProxyResponse Received new opId=0x7718569de710
+ganesh-adversarial-network:1718878:1719047 [0] NCCL INFO ncclPollProxyResponse Received new opId=0x767dc69c7bf0
+ganesh-adversarial-network:1718879:1719042 [1] NCCL INFO Received and initiated operation=Setup res=0
+ganesh-adversarial-network:1718878:1719041 [0] NCCL INFO Received and initiated operation=Setup res=0
+ganesh-adversarial-network:1718879:1719048 [1] NCCL INFO resp.opId=0x7718569de710 matches expected opId=0x7718569de710
+ganesh-adversarial-network:1718879:1719048 [1] NCCL INFO Channel 01 : 1[1] -> 2[2] via SHM/direct/direct
+ganesh-adversarial-network:1718878:1719047 [0] NCCL INFO resp.opId=0x767dc69c7bf0 matches expected opId=0x767dc69c7bf0
+ganesh-adversarial-network:1718878:1719047 [0] NCCL INFO Channel 01 : 0[0] -> 1[1] via SHM/direct/direct
+[rank3]: Traceback (most recent call last):
+[rank3]:   File "/home/ganesh/code/pantheon/src/pantheon/gpt2/scripts/train.py", line 63, in <module>
+[rank3]:     trainer.train()
+[rank3]:   File "/home/ganesh/code/pantheon/src/pantheon/gpt2/instrumentation/trainer.py", line 74, in train
+[rank3]:     loss = self.train_step(
+[rank3]:            ^^^^^^^^^^^^^^^^
+[rank3]:   File "/home/ganesh/code/pantheon/src/pantheon/gpt2/core/train.py", line 47, in train_step
+[rank3]:     logits = self.model(tokens)
+[rank3]:              ^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/home/ganesh/code/pantheon/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+[rank3]:     return self._call_impl(*args, **kwargs)
+[rank3]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/home/ganesh/code/pantheon/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1857, in _call_impl
+[rank3]:     return inner()
+[rank3]:            ^^^^^^^
+[rank3]:   File "/home/ganesh/code/pantheon/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in inner
+[rank3]:     args_kwargs_result = hook(self, args, kwargs)  # type: ignore[misc]
+[rank3]:                          ^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/home/ganesh/code/pantheon/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_fully_shard/_fsdp_state.py", line 62, in fsdp_hook_wrapper
+[rank3]:     return torch._dynamo.disable(func, recursive=True)(*args, **kwargs)
+[rank3]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/home/ganesh/code/pantheon/.venv/lib/python3.12/site-packages/torch/_dynamo/eval_frame.py", line 838, in _fn
+[rank3]:     return fn(*args, **kwargs)
+[rank3]:            ^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/home/ganesh/code/pantheon/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_fully_shard/_fsdp_state.py", line 230, in _pre_forward
+[rank3]:     args, kwargs = self._fsdp_param_group.pre_forward(module, args, kwargs)
+[rank3]:                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/home/ganesh/code/pantheon/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_fully_shard/_fsdp_param_group.py", line 339, in pre_forward
+[rank3]:     self.unshard(self.unshard_async_op)
+[rank3]:   File "/home/ganesh/code/pantheon/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_fully_shard/_fsdp_param_group.py", line 268, in unshard
+[rank3]:     self._all_gather_result = foreach_all_gather(
+[rank3]:                               ^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/home/ganesh/code/pantheon/.venv/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+[rank3]:     return func(*args, **kwargs)
+[rank3]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/home/ganesh/code/pantheon/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_fully_shard/_fsdp_collectives.py", line 174, in foreach_all_gather
+[rank3]:     all_gather_work = dist.all_gather_into_tensor(
+[rank3]:                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/home/ganesh/code/pantheon/.venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py", line 81, in wrapper
+[rank3]:     return func(*args, **kwargs)
+[rank3]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/home/ganesh/code/pantheon/.venv/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py", line 3836, in all_gather_into_tensor
+[rank3]:     work = group._allgather_base(output_tensor, input_tensor, opts)
+[rank3]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]: torch.distributed.DistBackendError: NCCL error in: /pytorch/torch/csrc/distributed/c10d/ProcessGroupNCCL.cpp:3353, unhandled cuda error (run with NCCL_DEBUG=INFO for details), NCCL version 2.26.2
+[rank3]: ncclUnhandledCudaError: Call to CUDA function failed.
+[rank3]: Last error:
+[rank3]: Cuda failure 2 'out of memory'
+[rank2]: Traceback (most recent call last):
+[rank2]:   File "/home/ganesh/code/pantheon/src/pantheon/gpt2/scripts/train.py", line 63, in <module>
+[rank2]:     trainer.train()
+[rank2]:   File "/home/ganesh/code/pantheon/src/pantheon/gpt2/instrumentation/trainer.py", line 74, in train
+[rank2]:     loss = self.train_step(
+[rank2]:            ^^^^^^^^^^^^^^^^
+[rank2]:   File "/home/ganesh/code/pantheon/src/pantheon/gpt2/core/train.py", line 47, in train_step
+[rank2]:     logits = self.model(tokens)
+[rank2]:              ^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/home/ganesh/code/pantheon/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+[rank2]:     return self._call_impl(*args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/home/ganesh/code/pantheon/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1857, in _call_impl
+[rank2]:     return inner()
+[rank2]:            ^^^^^^^
+[rank2]:   File "/home/ganesh/code/pantheon/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in inner
+[rank2]:     args_kwargs_result = hook(self, args, kwargs)  # type: ignore[misc]
+[rank2]:                          ^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/home/ganesh/code/pantheon/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_fully_shard/_fsdp_state.py", line 62, in fsdp_hook_wrapper
+[rank2]:     return torch._dynamo.disable(func, recursive=True)(*args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/home/ganesh/code/pantheon/.venv/lib/python3.12/site-packages/torch/_dynamo/eval_frame.py", line 838, in _fn
+[rank2]:     return fn(*args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/home/ganesh/code/pantheon/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_fully_shard/_fsdp_state.py", line 230, in _pre_forward
+[rank2]:     args, kwargs = self._fsdp_param_group.pre_forward(module, args, kwargs)
+[rank2]:                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/home/ganesh/code/pantheon/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_fully_shard/_fsdp_param_group.py", line 339, in pre_forward
+[rank2]:     self.unshard(self.unshard_async_op)
+[rank2]:   File "/home/ganesh/code/pantheon/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_fully_shard/_fsdp_param_group.py", line 268, in unshard
+[rank2]:     self._all_gather_result = foreach_all_gather(
+[rank2]:                               ^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/home/ganesh/code/pantheon/.venv/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+[rank2]:     return func(*args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/home/ganesh/code/pantheon/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_fully_shard/_fsdp_collectives.py", line 174, in foreach_all_gather
+[rank2]:     all_gather_work = dist.all_gather_into_tensor(
+[rank2]:                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/home/ganesh/code/pantheon/.venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py", line 81, in wrapper
+[rank2]:     return func(*args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/home/ganesh/code/pantheon/.venv/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py", line 3836, in all_gather_into_tensor
+[rank2]:     work = group._allgather_base(output_tensor, input_tensor, opts)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]: torch.distributed.DistBackendError: NCCL error in: /pytorch/torch/csrc/distributed/c10d/ProcessGroupNCCL.cpp:3353, unhandled cuda error (run with NCCL_DEBUG=INFO for details), NCCL version 2.26.2
+[rank2]: ncclUnhandledCudaError: Call to CUDA function failed.
+[rank2]: Last error:
+[rank2]: Cuda failure 2 'out of memory'
+ganesh-adversarial-network:1718880:1719044 [2] NCCL INFO [Proxy Service UDS] exit: stop 0 abortFlag 1
+ganesh-adversarial-network:1718881:1719043 [3] NCCL INFO [Proxy Service UDS] exit: stop 0 abortFlag 1
+ganesh-adversarial-network:1718881:1719072 [3] NCCL INFO socketProgressOpt: abort called
+ganesh-adversarial-network:1718881:1719072 [3] NCCL INFO misc/socket.cc:64 -> 3
+ganesh-adversarial-network:1718881:1719072 [3] NCCL INFO misc/socket.cc:80 -> 3
+ganesh-adversarial-network:1718881:1719072 [3] NCCL INFO misc/socket.cc:829 -> 3
+ganesh-adversarial-network:1718881:1719039 [3] NCCL INFO socketProgressOpt: abort called
+ganesh-adversarial-network:1718881:1719039 [3] NCCL INFO misc/socket.cc:881 -> 3
+ganesh-adversarial-network:1718881:1719072 [3] NCCL INFO comm 0x224c6ea0 rank 3 nranks 4 cudaDev 3 busId 43000 - Abort COMPLETE
+ganesh-adversarial-network:1718880:1719074 [2] NCCL INFO socketProgressOpt: abort called
+ganesh-adversarial-network:1718880:1719074 [2] NCCL INFO misc/socket.cc:64 -> 3
+ganesh-adversarial-network:1718880:1719074 [2] NCCL INFO misc/socket.cc:80 -> 3
+ganesh-adversarial-network:1718880:1719074 [2] NCCL INFO misc/socket.cc:829 -> 3
+ganesh-adversarial-network:1718880:1719040 [2] NCCL INFO socketProgressOpt: abort called
+ganesh-adversarial-network:1718880:1719040 [2] NCCL INFO misc/socket.cc:881 -> 3
+ganesh-adversarial-network:1718880:1719074 [2] NCCL INFO comm 0x3fc4c590 rank 2 nranks 4 cudaDev 2 busId 42000 - Abort COMPLETE
+ganesh-adversarial-network:1718881:1719036 [0] NCCL INFO RAS handling local termination request
+ganesh-adversarial-network:1718881:1719036 [0] NCCL INFO RAS terminating a connection with 192.168.1.210<45165>
+ganesh-adversarial-network:1718881:1719036 [0] NCCL INFO RAS terminating a connection with 192.168.1.210<45681>
+ganesh-adversarial-network:1718880:1719037 [0] NCCL INFO RAS current socket connection with 192.168.1.210<45061> closed by peer on receive; terminating it
+ganesh-adversarial-network:1718881:1719036 [0] NCCL INFO RAS thread terminating
+ganesh-adversarial-network:1718878:1719030 [0] NCCL INFO RAS current socket connection with 192.168.1.210<45061> closed by peer on receive; terminating it
+ganesh-adversarial-network:1718880:1719037 [0] NCCL INFO RAS handling local termination request
+ganesh-adversarial-network:1718880:1719037 [0] NCCL INFO RAS terminating a connection with 192.168.1.210<45603>
+ganesh-adversarial-network:1718880:1719037 [0] NCCL INFO RAS terminating a connection with 192.168.1.210<45061>
+ganesh-adversarial-network:1718880:1719037 [0] NCCL INFO RAS thread terminating
+ganesh-adversarial-network:1718879:1719035 [0] NCCL INFO RAS current socket connection with 192.168.1.210<45165> closed by peer on receive; terminating it
+W0706 11:04:14.645000 1718845 torch/distributed/elastic/multiprocessing/api.py:900] Sending process 1718878 closing signal SIGTERM
+W0706 11:04:14.648000 1718845 torch/distributed/elastic/multiprocessing/api.py:900] Sending process 1718879 closing signal SIGTERM
+W0706 11:04:14.649000 1718845 torch/distributed/elastic/multiprocessing/api.py:900] Sending process 1718880 closing signal SIGTERM
+E0706 11:04:14.864000 1718845 torch/distributed/elastic/multiprocessing/api.py:874] failed (exitcode: 1) local_rank: 3 (pid: 1718881) of binary: /home/ganesh/code/pantheon/.venv/bin/python3
+Traceback (most recent call last):
+  File "/home/ganesh/code/pantheon/.venv/bin/torchrun", line 10, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/ganesh/code/pantheon/.venv/lib/python3.12/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 355, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/ganesh/code/pantheon/.venv/lib/python3.12/site-packages/torch/distributed/run.py", line 892, in main
+    run(args)
+  File "/home/ganesh/code/pantheon/.venv/lib/python3.12/site-packages/torch/distributed/run.py", line 883, in run
+    elastic_launch(
+  File "/home/ganesh/code/pantheon/.venv/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 139, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ganesh/code/pantheon/.venv/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 270, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+scripts/train.py FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2025-07-06_11:04:14
+  host      : ganesh-adversarial-network
+  rank      : 3 (local_rank: 3)
+  exitcode  : 1 (pid: 1718881)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================
