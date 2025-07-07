@@ -8,7 +8,7 @@ class GPT2Config:
     d_vocab: int = 50257
 
     # Sequence length
-    context_window: int = 512
+    context_window: int = 1024
 
     # Transformer blocks
     num_blocks: int = 12
@@ -26,7 +26,7 @@ class GPT2Config:
 
     # Training duration
     epochs: int = 1
-    num_sequences_per_batch: int = 16
+    num_sequences_per_batch: int = 6
 
     # Weight initialization
     initialized_std_range: float = 1 / ((2 * num_blocks) ** 0.5)
@@ -47,7 +47,7 @@ class GPT2Config:
     wandb_entity: str = "the-ganesh-ravichandran-none"
     wandb_project: str = "gpt2"
 
-    memory_dump_path: str = "profiling_data/snapshot.pickle"
+    memory_dump_path: str = "profiling_data/snapshot"
     memory_timeline_path: str = "profiling_data/shapes.html"
 
     performance_profile_path: str = "profiling_data/traces"

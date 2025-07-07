@@ -1,5 +1,6 @@
 import torch
 import wandb
+import os
 
 
 class ObservabilityContextManager:
@@ -39,14 +40,19 @@ class MemoryContextManager:
         return self
 
     def __exit__(self, *_):
-        print(f"Dumping memory snapshot at {self.config.memory_dump_path}")
+        local_rank = int(os.environ["LOCAL_RANK"])
+        path = self.config.memory_dump_path + f"_{local_rank}.pkl"
+        print(f"Dumping memory snapshot at {path}")
 
-        torch.cuda.memory._dump_snapshot(self.config.memory_dump_path)
+        torch.cuda.memory._dump_snapshot(path)
         torch.cuda.memory._record_memory_history(enabled=None)
 
     def oom_observer(self, device, alloc, device_alloc, device_free):
         print("Saving memory snapshot at OOM")
-        torch.cuda.memory._dump_snapshot(self.config.memory_dump_path)
+        local_rank = int(os.environ["LOCAL_RANK"])
+        path = self.config.memory_dump_path + f"_{local_rank}.pkl"
+
+        torch.cuda.memory._dump_snapshot(path)
         torch.cuda.memory._record_memory_history(enabled=None)
 
 
