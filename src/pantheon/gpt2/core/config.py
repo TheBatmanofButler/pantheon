@@ -8,7 +8,7 @@ class GPT2Config:
     d_vocab: int = 50257
 
     # Sequence length
-    context_window: int = 1024
+    context_window: int = 512
 
     # Transformer blocks
     num_blocks: int = 12
@@ -26,7 +26,7 @@ class GPT2Config:
 
     # Training duration
     epochs: int = 1
-    num_sequences_per_batch: int = 6
+    num_sequences_per_batch: int = 16
 
     # Weight initialization
     initialized_std_range: float = 1 / ((2 * num_blocks) ** 0.5)
