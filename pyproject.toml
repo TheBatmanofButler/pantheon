@@ -7,6 +7,7 @@ requires-python = ">=3.12"
 dependencies = [
     "datasets>=3.6.0",
     "einops>=0.8.1",
+    "equinox>=0.13.0",
     "flax>=0.10.6",
     "ipython>=9.4.0",
     "jax[cuda12]>=0.5.3",
