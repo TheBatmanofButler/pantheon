@@ -1,14 +1,15 @@
+from functools import partial
 import equinox as eqx
 import jax
-import jax.numpy as jnp
 
 import pantheon.gpt2_jax.core.config as config
-import pantheon.gpt2_jax.data.tokenizer as tokenizer
+import pantheon.gpt2_jax.core.embed as embed_lib
 
 
 class GPT2(eqx.Module):
     embed: eqx.nn.Embedding
-    # pos_embed: eqx.nn.Embedding
+    pos_embed: embed_lib.PositionalEmbedding
+    unembed: embed_lib.Unembedding
 
     def __init__(self, key):
         key, embed_key = jax.random.split(key)
@@ -18,46 +19,24 @@ class GPT2(eqx.Module):
             config.GPT2Config.d_embedding,
             key=embed_key,
         )
-
-        # pos_embed = jnp.zeros(
-        #     [
-        #         config.GPT2Config.context_window,
-        #         config.GPT2Config.d_embedding,
-        #     ]
-        # )
-        # print(1)
-        # for i in range(len(pos_embed)):
-        #     for j in range(len(pos_embed[i])):
-        #         angle = i / 10000 ** (2 * (j // 2) / config.GPT2Config.d_vocab)
-
-        #         if j % 2 == 0:
-        #             pos_embed = pos_embed.at[i, j].set(jnp.sin(angle))
-        #         else:
-        #             pos_embed = pos_embed.at[i, j].set(jnp.cos(angle))
-        # print(2)
-        # self.pos_embed = eqx.nn.Embedding(weight=pos_embed)
-
-    def unembed(self, x):
-        x = jnp.dot(x, self.embed.weight.T)
-        x = jnp.argmax(x)
-
-        return x
+        self.pos_embed = embed_lib.PositionalEmbedding(
+            config.GPT2Config.context_window,
+            config.GPT2Config.d_embedding,
+        )
+        self.unembed = embed_lib.Unembedding(self.embed.weight)
 
     def __call__(self, sample):
+        return jax.vmap(self.sample_call)(sample)
+
+    def sample_call(self, sample):
         x = sample["input_ids"]
 
-        x = jax.vmap(self.embed)(x)  # + self.pos_embed(x)
-        x = jax.vmap(self.unembed)(x)
-        # print("output", x, x.shape)
-        # x = x @ self.embed.weight
-        # x = jnp.dot(x, self.embed.weight)
-        # print(x)
-        # x = x @ self.embed.weight.T
-        # x = jnp.dot(x, self.embed.weight.T)
-        # print(x)
+        x = self.embed(x) + self.pos_embed(x)
+        x = self.unembed(x)
 
         return x
 
 
-def predict(model: GPT2, x):
-    return jax.vmap(model)(x)
+@partial(jax.vmap, in_axes=(None, 0))
+def predict(model: GPT2, sample):
+    return model(sample)

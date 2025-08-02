@@ -8,7 +8,7 @@ class GPT2Config:
     d_vocab: int = 50257
 
     # Sequence length
-    context_window: int = 512
+    context_window: int = 10
 
     # Transformer blocks
     num_blocks: int = 12
