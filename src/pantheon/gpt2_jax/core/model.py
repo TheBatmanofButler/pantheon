@@ -9,7 +9,7 @@ import pantheon.gpt2_jax.core.embed as embed_lib
 class GPT2(eqx.Module):
     embed: eqx.nn.Embedding
     pos_embed: embed_lib.PositionalEmbedding
-    unembed: embed_lib.Unembedding
+    unembed: embed_lib.TiedUnembedding
 
     def __init__(self, key):
         key, embed_key = jax.random.split(key)
@@ -23,7 +23,7 @@ class GPT2(eqx.Module):
             config.GPT2Config.context_window,
             config.GPT2Config.d_embedding,
         )
-        self.unembed = embed_lib.Unembedding(self.embed.weight)
+        self.unembed = embed_lib.TiedUnembedding(self.embed.weight)
 
     def __call__(self, sample):
         return jax.vmap(self.sample_call)(sample)

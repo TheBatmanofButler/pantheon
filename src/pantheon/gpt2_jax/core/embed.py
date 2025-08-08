@@ -23,7 +23,7 @@ class PositionalEmbedding(eqx.Module):
         return self.embedding(x)
 
 
-class Unembedding(eqx.Module):
+class TiedUnembedding(eqx.Module):
     W: jax.Array
 
     def __init__(
