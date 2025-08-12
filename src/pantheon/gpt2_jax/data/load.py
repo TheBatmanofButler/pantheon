@@ -1,4 +1,5 @@
 import collections
+import jax
 import jax.numpy as jnp
 import datasets
 import torch
@@ -37,10 +38,9 @@ def build_dataloaders(config: GPT2Config):
     )
 
     def collate(batch):
-        new_batch = collections.defaultdict(list)
-        for key in batch[0]:
-            new_batch[key] = jnp.stack([jnp.array(sequence[key]) for sequence in batch])
-        return new_batch
+        return jnp.array(
+            [jnp.array([sample[key] for key in sample]) for sample in batch]
+        )
 
     # Create dataloader iterables for training and validation.
     train_dataset = train_dataset.select_columns(
@@ -51,7 +51,7 @@ def build_dataloaders(config: GPT2Config):
     ).with_format("torch")
     train_dataloader = torch.utils.data.DataLoader(
         train_dataset,
-        batch_size=2,
+        batch_size=config.GPT2Config.num_sequences_per_batch,
         collate_fn=collate,
     )
 

@@ -4,15 +4,17 @@ import jax
 
 import pantheon.gpt2_jax.core.config as config
 import pantheon.gpt2_jax.core.embed as embed_lib
+import pantheon.gpt2_jax.core.block as block_lib
 
 
 class GPT2(eqx.Module):
     embed: eqx.nn.Embedding
     pos_embed: embed_lib.PositionalEmbedding
+    blocks: list[block_lib.Block]
     unembed: embed_lib.TiedUnembedding
 
     def __init__(self, key):
-        key, embed_key = jax.random.split(key)
+        key, embed_key, block_key = jax.random.split(key, 3)
 
         self.embed = eqx.nn.Embedding(
             config.GPT2Config.d_vocab,
@@ -23,15 +25,27 @@ class GPT2(eqx.Module):
             config.GPT2Config.context_window,
             config.GPT2Config.d_embedding,
         )
+
+        self.blocks = [
+            block_lib.Block(
+                block_key,
+                config.GPT2Config.d_embedding,
+                config.GPT2Config.d_mlp,
+                config.GPT2Config.context_window,
+                config.GPT2Config.layer_norm_epsilon,
+            )
+            for _ in range(config.GPT2Config.num_blocks)
+        ]
+
         self.unembed = embed_lib.TiedUnembedding(self.embed.weight)
 
     def __call__(self, sample):
-        return jax.vmap(self.sample_call)(sample)
+        x = sample[0]
 
-    def sample_call(self, sample):
-        x = sample["input_ids"]
+        x = jax.vmap(self.embed)(x) + jax.vmap(self.pos_embed)(x)
+        for block in self.blocks:
+            x = block(x)
 
-        x = self.embed(x) + self.pos_embed(x)
         x = self.unembed(x)
 
         return x

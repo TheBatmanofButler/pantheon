@@ -33,7 +33,8 @@ class TiedUnembedding(eqx.Module):
         self.W = embedding_weight.T
 
     def __call__(self, x):
-        x = jnp.dot(x, self.W)
+        x = jnp.matmul(x, self.W)
+        x = jax.nn.softmax(x)
         x = jnp.argmax(x)
 
         return x
