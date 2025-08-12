@@ -35,6 +35,6 @@ class TiedUnembedding(eqx.Module):
     def __call__(self, x):
         x = jnp.matmul(x, self.W)
         x = jax.nn.softmax(x)
-        x = jnp.argmax(x)
+        x = jnp.argmax(x, -1)
 
         return x

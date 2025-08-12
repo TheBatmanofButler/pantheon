@@ -26,16 +26,8 @@ for batch in train_dataloader:
     predictions = model.predict(
         gpt2,
         batch,
-        # batch[0],
     )
-    print("decoded", tokenizer.tokenizer.decode(predictions))
 
-    # print(
-    #     [
-    #         tokenizer.tokenizer.decode(prediction[i])
-    #         for prediction in predictions
-    #         for i in range(len(prediction))
-    #     ]
-    # )
+    print([tokenizer.tokenizer.decode(prediction) for prediction in predictions])
 
-    break
+    # break
