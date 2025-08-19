@@ -26,7 +26,7 @@ def build_dataloaders(config: GPT2Config):
             truncation=True,
         )
 
-    NUM_TRAIN_SAMPLES = 2048
+    NUM_TRAIN_SAMPLES = 65536
     NUM_VAL_SAMPLES = NUM_TRAIN_SAMPLES // 10
 
     # Tokenize datasets.
