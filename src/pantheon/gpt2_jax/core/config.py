@@ -19,7 +19,7 @@ class GPT2Config:
     d_mlp: int = d_embedding * 4
 
     # Optimization
-    learning_rate: float = 1e-4
+    learning_rate: float = 1e-5
     weight_decay: float = 1e-4
     accumulation_steps: int = 1
     activation_recomputation: bool = True
@@ -57,6 +57,9 @@ class GPT2Config:
     record_shapes: bool = True
 
     saved_model_name: str = "gpt2.eqx"
+
+    # Inference
+    temperature: float = 2.0
 
     def to_dict(self) -> dict:
         """Convert config to dictionary."""

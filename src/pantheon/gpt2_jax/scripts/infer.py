@@ -20,8 +20,8 @@ def sample(prompt: str, max_tokens_generated=100):
     input_ids = jnp.array([tokens["input_ids"]])
 
     for _ in range(max_tokens_generated):
-        print("input_ids", input_ids, input_ids.shape)
         logits = gpt2(input_ids)
+        logits = logits / config.gpt2_config.temperature
 
         next_token = jnp.argmax(
             -jax.nn.log_softmax(
@@ -31,7 +31,6 @@ def sample(prompt: str, max_tokens_generated=100):
         ).reshape(1, 1)
         input_ids = jnp.concat([input_ids, next_token], axis=-1)
 
-        print(next_token)
         print(tokenizer.tokenizer.decode(next_token[0, 0]))
 
     return logits
