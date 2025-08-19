@@ -4,11 +4,11 @@ from dataclasses import dataclass, asdict
 @dataclass
 class GPT2Config:
     # Core dimensions
-    d_embedding: int = 768 // 2
+    d_embedding: int = 384
     d_vocab: int = 50257
 
     # Sequence length
-    context_window: int = 512 // 2
+    context_window: int = 256
 
     # Transformer blocks
     num_blocks: int = 12
@@ -20,28 +20,22 @@ class GPT2Config:
 
     # Optimization
     learning_rate: float = 1e-5
-    weight_decay: float = 1e-4
-    accumulation_steps: int = 1
-    activation_recomputation: bool = True
 
-    # Training duration
-    epochs: int = 1
+    # Training
     num_sequences_per_batch: int = 16
 
     # Weight initialization
-    initialized_std_range: float = 0.2
+    initialized_std_range: float = 0.02
 
     # Normalization
     layer_norm_epsilon: float = 1e-5
 
-    # Training limits (optional)
-    max_batches_per_epoch: int | None = None
-    limited_dataset_size: int | None = None
+    # Inference
+    temperature: float = 2.0
 
     # Dataset
     dataset_path: str = "roneneldan/TinyStories"
     dataset_name: str | None = None
-    test_size: int = limited_dataset_size // 10 if limited_dataset_size else 1000
 
     # Tokenizer
     tokenizer_path: str = "openai-community/gpt2"
@@ -50,16 +44,7 @@ class GPT2Config:
     wandb_entity: str = "the-ganesh-ravichandran-none"
     wandb_project: str = "gpt2-jax"
 
-    memory_dump_path: str = "profiling_data/snapshot"
-    memory_timeline_path: str = "profiling_data/shapes.html"
-
-    performance_profile_path: str = "profiling_data/traces"
-    record_shapes: bool = True
-
     saved_model_name: str = "gpt2.eqx"
-
-    # Inference
-    temperature: float = 2.0
 
     def to_dict(self) -> dict:
         """Convert config to dictionary."""

@@ -27,6 +27,7 @@ def loss_fn(model, sample):
 
     predictions = logits[:-1]
     targets = sample[0][1:]
+    attention_mask = sample[1][1:]
 
     losses = jnp.array(
         [
@@ -35,7 +36,11 @@ def loss_fn(model, sample):
         ]
     )
 
-    return jnp.mean(losses)
+    masked_losses = losses * attention_mask
+    total_loss = jnp.sum(masked_losses)
+    total_tokens = jnp.sum(attention_mask)
+
+    return jnp.where(total_tokens > 0, total_loss / total_tokens, 0.0)
 
 
 def param_loss_fn(params, static, batch):
@@ -50,7 +55,7 @@ def update_step(model, optimizer_state, batch):
     params, static = eqx.partition(model, eqx.is_array)
 
     loss, grads = jax.value_and_grad(param_loss_fn)(params, static, batch)
-    loss = jnp.clip(loss, a_max=100.0)
+    # grads = jax.tree_util.tree_map(lambda g: jnp.clip(g, -1.0, 1.0), grads)
 
     updates, optimizer_state = optimizer.update(grads, optimizer_state, params)
     params = eqx.apply_updates(params, updates)
@@ -91,7 +96,7 @@ for batch_idx, batch in enumerate(train_dataloader):
         step=step,
     )
 
-    if step % 10 == 0:
+    if step % 100 == 0:
         batch_accuracies = jax.vmap(lambda sample: evaluate(gpt2, sample))(
             next(iter(test_dataloader))
         )

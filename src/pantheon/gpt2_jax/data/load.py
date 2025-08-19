@@ -2,7 +2,7 @@ import equinox as eqx
 import jax.numpy as jnp
 import datasets
 import torch
-
+import os
 
 import pantheon.gpt2_jax.data.tokenizer as tokenizer
 from pantheon.gpt2_jax.core.config import GPT2Config
@@ -10,12 +10,27 @@ from pantheon.gpt2_jax.core.config import GPT2Config
 
 def build_dataloaders(config: GPT2Config):
     # Load training and validation data.
-    dataset_dict = datasets.load_dataset(
-        config.dataset_path,
-        config.dataset_name,
-    )
+
+    dataset_path = os.path.join(os.getcwd(), "dataset")
+
+    if not os.path.exists(dataset_path):
+        dataset_dict = datasets.load_dataset(
+            config.dataset_path,
+            config.dataset_name,
+            cache_dir=dataset_path,
+        )
+    else:
+        dataset_dict = datasets.load_from_disk(dataset_path)
+
     train_dataset = dataset_dict[datasets.Split.TRAIN]
     val_dataset = dataset_dict[datasets.Split.VALIDATION]
+
+    NUM_TRAIN_SAMPLES = 2**21
+    NUM_VAL_SAMPLES = NUM_TRAIN_SAMPLES // 100
+    if NUM_VAL_SAMPLES > len(val_dataset):
+        raise ValueError(
+            f"Number of validation samples ({NUM_VAL_SAMPLES}) is greater than the number of samples in the dataset ({len(val_dataset)})"
+        )
 
     #  Each sample will be padded or truncated to the size of the context window.
     def tokenize(sample: str):
@@ -26,18 +41,27 @@ def build_dataloaders(config: GPT2Config):
             truncation=True,
         )
 
-    NUM_TRAIN_SAMPLES = 65536
-    NUM_VAL_SAMPLES = NUM_TRAIN_SAMPLES // 10
-
-    # Tokenize datasets.
-    train_dataset = train_dataset.select(range(NUM_TRAIN_SAMPLES)).map(
-        tokenize,
-        batched=True,
-    )
-    val_dataset = val_dataset.select(range(NUM_VAL_SAMPLES)).map(
-        tokenize,
-        batched=True,
-    )
+    train_dataset_path = os.path.join(os.getcwd(), "dataset_train")
+    val_dataset_path = os.path.join(os.getcwd(), "dataset_val")
+    if not os.path.exists(train_dataset_path):
+        # Tokenize datasets.
+        train_dataset = (
+            train_dataset.select(range(NUM_TRAIN_SAMPLES))
+            .filter(lambda x: len(x["text"]) > 2)
+            .map(
+                tokenize,
+                batched=True,
+            )
+        )
+        val_dataset = val_dataset.filter(lambda x: len(x["text"]) > 2).map(
+            tokenize,
+            batched=True,
+        )
+        train_dataset.save_to_disk(train_dataset_path)
+        val_dataset.save_to_disk(val_dataset_path)
+    else:
+        train_dataset = datasets.load_from_disk(train_dataset_path)
+        val_dataset = datasets.load_from_disk(val_dataset_path)
 
     def collate(batch):
         return jnp.array(
