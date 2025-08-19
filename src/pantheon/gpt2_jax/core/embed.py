@@ -3,6 +3,23 @@ import jax
 import jax.numpy as jnp
 
 
+class Embed(eqx.Module):
+    W: jax.Array
+
+    def __init__(self, key, d_vocab, d_embedding, initialized_std_range):
+        key, W_key = jax.random.split(key, 2)
+        self.W = (
+            jax.random.normal(
+                key=W_key,
+                shape=(d_vocab, d_embedding),
+            )
+            * initialized_std_range
+        )
+
+    def __call__(self, x):
+        return self.W[x]
+
+
 class PositionalEmbedding(eqx.Module):
     embedding: eqx.nn.Embedding
 
@@ -23,7 +40,26 @@ class PositionalEmbedding(eqx.Module):
         return self.embedding(x)
 
 
-class TiedUnembedding(eqx.Module):
+class Unembed(eqx.Module):
+    W: jax.Array
+
+    def __init__(self, key, d_vocab, d_embedding, initialized_std_range):
+        key, W_key = jax.random.split(key, 2)
+        self.W = (
+            jax.random.normal(
+                key=W_key,
+                shape=(d_embedding, d_vocab),
+            )
+            * initialized_std_range
+        )
+
+    def __call__(self, x):
+        logits = jnp.matmul(x, self.W)
+
+        return logits
+
+
+class TiedUnembed(eqx.Module):
     W: jax.Array
 
     def __init__(
@@ -33,8 +69,6 @@ class TiedUnembedding(eqx.Module):
         self.W = embedding_weight.T
 
     def __call__(self, x):
-        x = jnp.matmul(x, self.W)
-        x = jax.nn.softmax(x)
-        x = jnp.argmax(x, -1)
+        logits = jnp.matmul(x, self.W)
 
-        return x
+        return logits

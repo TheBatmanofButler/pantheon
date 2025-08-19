@@ -1,5 +1,4 @@
-import collections
-import jax
+import equinox as eqx
 import jax.numpy as jnp
 import datasets
 import torch
@@ -12,8 +11,8 @@ from pantheon.gpt2_jax.core.config import GPT2Config
 def build_dataloaders(config: GPT2Config):
     # Load training and validation data.
     dataset_dict = datasets.load_dataset(
-        config.GPT2Config.dataset_path,
-        config.GPT2Config.dataset_name,
+        config.dataset_path,
+        config.dataset_name,
     )
     train_dataset = dataset_dict[datasets.Split.TRAIN]
     val_dataset = dataset_dict[datasets.Split.VALIDATION]
@@ -22,17 +21,20 @@ def build_dataloaders(config: GPT2Config):
     def tokenize(sample: str):
         return tokenizer.tokenizer(
             sample["text"],
-            max_length=config.GPT2Config.context_window,
+            max_length=config.context_window,
             padding="max_length",
             truncation=True,
         )
 
+    NUM_TRAIN_SAMPLES = 2048
+    NUM_VAL_SAMPLES = NUM_TRAIN_SAMPLES // 10
+
     # Tokenize datasets.
-    train_dataset = train_dataset.select(range(10)).map(
+    train_dataset = train_dataset.select(range(NUM_TRAIN_SAMPLES)).map(
         tokenize,
         batched=True,
     )
-    val_dataset = val_dataset.select(range(10)).map(
+    val_dataset = val_dataset.select(range(NUM_VAL_SAMPLES)).map(
         tokenize,
         batched=True,
     )
@@ -51,7 +53,7 @@ def build_dataloaders(config: GPT2Config):
     ).with_format("torch")
     train_dataloader = torch.utils.data.DataLoader(
         train_dataset,
-        batch_size=config.GPT2Config.num_sequences_per_batch,
+        batch_size=config.num_sequences_per_batch,
         collate_fn=collate,
     )
 
@@ -68,3 +70,7 @@ def build_dataloaders(config: GPT2Config):
     )
 
     return train_dataloader, val_dataloader
+
+
+def load_model(model, config: GPT2Config):
+    return eqx.tree_deserialise_leaves(config.saved_model_name, model)

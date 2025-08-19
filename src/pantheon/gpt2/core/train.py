@@ -49,7 +49,13 @@ class Trainer(trainer.InstrumentedTrainer):
         loss = -loss_utils.get_log_probs(logits, tokens).mean()
         loss /= accumulation_steps
 
+        # Clip loss to prevent numerical instability
+        loss = torch.clamp(loss, max=100.0)
+
         loss.backward()
+
+        # Add gradient clipping to prevent explosion
+        torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)
 
         if (step_index + 1) % accumulation_steps == 0:
             self.optimizer.step()

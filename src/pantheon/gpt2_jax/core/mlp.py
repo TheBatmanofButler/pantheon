@@ -13,22 +13,37 @@ class MLP(eqx.Module):
     def __init__(self, key, d_embedding, d_mlp):
         key, l0_W_key, l0_b_key, l1_W_key, l1_b_key = jax.random.split(key, 5)
 
-        self.l0_W = jax.random.normal(
-            key=l0_W_key,
-            shape=(d_embedding, d_mlp),
+        # Use proper initialization scaling
+        scale = 0.02
+
+        self.l0_W = (
+            jax.random.normal(
+                key=l0_W_key,
+                shape=(d_embedding, d_mlp),
+            )
+            * scale
         )
-        self.l0_b = jax.random.normal(
-            key=l0_b_key,
-            shape=(d_mlp,),
+        self.l0_b = (
+            jax.random.normal(
+                key=l0_b_key,
+                shape=(d_mlp,),
+            )
+            * scale
         )
 
-        self.l1_W = jax.random.normal(
-            key=l1_W_key,
-            shape=(d_mlp, d_embedding),
+        self.l1_W = (
+            jax.random.normal(
+                key=l1_W_key,
+                shape=(d_mlp, d_embedding),
+            )
+            * scale
         )
-        self.l1_b = jax.random.normal(
-            key=l1_b_key,
-            shape=(d_embedding,),
+        self.l1_b = (
+            jax.random.normal(
+                key=l1_b_key,
+                shape=(d_embedding,),
+            )
+            * scale
         )
 
     def __call__(self, x):

@@ -8,36 +8,44 @@ import pantheon.gpt2_jax.core.block as block_lib
 
 
 class GPT2(eqx.Module):
-    embed: eqx.nn.Embedding
+    embed: embed_lib.Embed
     pos_embed: embed_lib.PositionalEmbedding
     blocks: list[block_lib.Block]
-    unembed: embed_lib.TiedUnembedding
+    unembed: embed_lib.Unembed
 
     def __init__(self, key):
-        key, embed_key, block_key = jax.random.split(key, 3)
+        key, embed_key = jax.random.split(key, 2)
+        block_keys = jax.random.split(key, config.gpt2_config.num_blocks)
 
-        self.embed = eqx.nn.Embedding(
-            config.GPT2Config.d_vocab,
-            config.GPT2Config.d_embedding,
+        self.embed = embed_lib.Embed(
             key=embed_key,
+            d_vocab=config.gpt2_config.d_vocab,
+            d_embedding=config.gpt2_config.d_embedding,
+            initialized_std_range=config.gpt2_config.initialized_std_range,
         )
         self.pos_embed = embed_lib.PositionalEmbedding(
-            config.GPT2Config.context_window,
-            config.GPT2Config.d_embedding,
+            config.gpt2_config.context_window,
+            config.gpt2_config.d_embedding,
         )
 
         self.blocks = [
             block_lib.Block(
-                block_key,
-                config.GPT2Config.d_embedding,
-                config.GPT2Config.d_mlp,
-                config.GPT2Config.context_window,
-                config.GPT2Config.layer_norm_epsilon,
+                block_keys[i],
+                config.gpt2_config.d_head,
+                config.gpt2_config.d_embedding,
+                config.gpt2_config.d_mlp,
+                config.gpt2_config.context_window,
+                config.gpt2_config.layer_norm_epsilon,
             )
-            for _ in range(config.GPT2Config.num_blocks)
+            for i in range(config.gpt2_config.num_blocks)
         ]
 
-        self.unembed = embed_lib.TiedUnembedding(self.embed.weight)
+        self.unembed = embed_lib.Unembed(
+            key=embed_key,
+            d_vocab=config.gpt2_config.d_vocab,
+            d_embedding=config.gpt2_config.d_embedding,
+            initialized_std_range=config.gpt2_config.initialized_std_range,
+        )
 
     def __call__(self, sample):
         x = sample[0]
@@ -49,8 +57,3 @@ class GPT2(eqx.Module):
         x = self.unembed(x)
 
         return x
-
-
-@partial(jax.vmap, in_axes=(None, 0))
-def predict(model: GPT2, sample):
-    return model(sample)
