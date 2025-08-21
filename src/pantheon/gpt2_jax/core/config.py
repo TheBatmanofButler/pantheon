@@ -4,7 +4,7 @@ from dataclasses import dataclass, asdict
 @dataclass
 class GPT2Config:
     # Core dimensions
-    d_embedding: int = 5
+    d_embedding: int = 384
     d_vocab: int = 50257
 
     # Sequence length

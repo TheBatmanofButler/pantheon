@@ -42,7 +42,7 @@ def loss_fn(params, sample):
     return jnp.where(total_tokens > 0, total_loss / total_tokens, 0.0)
 
 
-def param_loss_fn(params, static, batch):
+def param_loss_fn(params, batch):
     losses = jax.vmap(lambda sample: loss_fn(params, sample))(batch)
 
     return jnp.mean(losses)
@@ -101,4 +101,4 @@ for batch_idx, batch in enumerate(train_dataloader):
         #     step=step,
         # )
 
-save.save_model(params, config.gpt2_config.saved_model_name)
+# save.save_model(params, config.gpt2_config.saved_model_name)

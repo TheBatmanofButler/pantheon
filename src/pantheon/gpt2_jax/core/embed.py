@@ -15,7 +15,7 @@ def embed_init(key, d_vocab, d_embedding, initialized_std_range):
 
 
 def embed_forward(params, x):
-    return params["W"][x]
+    return params[x]
 
 
 def pos_embed_init(context_window, d_embedding):
@@ -31,7 +31,7 @@ def pos_embed_init(context_window, d_embedding):
 
 
 def pos_embed_forward(params, x):
-    return params["PositionalEmbedding"][x]
+    return params[x]
 
 
 def unembed_init(key, d_vocab, d_embedding, initialized_std_range):
@@ -47,4 +47,4 @@ def unembed_init(key, d_vocab, d_embedding, initialized_std_range):
 
 
 def unembed_forward(params, x):
-    return jnp.matmul(x, params["Unembedding"])
+    return jnp.matmul(x, params)

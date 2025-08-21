@@ -45,7 +45,12 @@ def forward(params, sample):
     ) + jax.vmap(embed_lib.pos_embed_forward, in_axes=(None, 0))(params["pos_embed"], x)
 
     for block in params["blocks"]:
-        x = block_lib.forward(block, x, config.gpt2_config.layer_norm_epsilon)
+        x = block_lib.forward(
+            block,
+            x,
+            config.gpt2_config.layer_norm_epsilon,
+            config.gpt2_config.d_head,
+        )
 
     x = embed_lib.unembed_forward(params["unembed"], x)
 

@@ -17,9 +17,9 @@ def init(key, d_embedding, d_mlp):
     }
 
 
-def forward(params, x, layer_norm_epsilon):
+def forward(params, x, layer_norm_epsilon, d_head):
     x = layer_norm_lib.layer_norm(x, layer_norm_epsilon)
-    x = attention_lib.forward(params["attention"], x) + x
+    x = attention_lib.forward(params["attention"], x, d_head) + x
     x = layer_norm_lib.layer_norm(x, layer_norm_epsilon)
     x = mlp_lib.forward(params["mlp"], x) + x
 
