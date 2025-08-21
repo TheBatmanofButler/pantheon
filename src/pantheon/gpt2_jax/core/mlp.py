@@ -1,54 +1,40 @@
-import equinox as eqx
 import jax
 import jax.numpy as jnp
 
 
-class MLP(eqx.Module):
-    l0_W: jax.Array
-    l0_b: jax.Array
+def init(key, d_embedding, d_mlp):
+    key, l0_W_key, l0_b_key, l1_W_key, l1_b_key = jax.random.split(key, 5)
+    scale = 0.02
 
-    l1_W: jax.Array
-    l1_b: jax.Array
-
-    def __init__(self, key, d_embedding, d_mlp):
-        key, l0_W_key, l0_b_key, l1_W_key, l1_b_key = jax.random.split(key, 5)
-
-        # Use proper initialization scaling
-        scale = 0.02
-
-        self.l0_W = (
-            jax.random.normal(
-                key=l0_W_key,
-                shape=(d_embedding, d_mlp),
-            )
-            * scale
+    params = {
+        "l0_W": jax.random.normal(
+            key=l0_W_key,
+            shape=(d_embedding, d_mlp),
         )
-        self.l0_b = (
-            jax.random.normal(
-                key=l0_b_key,
-                shape=(d_mlp,),
-            )
-            * scale
+        * scale,
+        "l0_b": jax.random.normal(
+            key=l0_b_key,
+            shape=(d_mlp,),
         )
-
-        self.l1_W = (
-            jax.random.normal(
-                key=l1_W_key,
-                shape=(d_mlp, d_embedding),
-            )
-            * scale
+        * scale,
+        "l1_W": jax.random.normal(
+            key=l1_W_key,
+            shape=(d_mlp, d_embedding),
         )
-        self.l1_b = (
-            jax.random.normal(
-                key=l1_b_key,
-                shape=(d_embedding,),
-            )
-            * scale
+        * scale,
+        "l1_b": jax.random.normal(
+            key=l1_b_key,
+            shape=(d_embedding,),
         )
+        * scale,
+    }
 
-    def __call__(self, x):
-        x = jnp.matmul(x, self.l0_W) + self.l0_b
-        x = jax.nn.gelu(x)
-        x = jnp.matmul(x, self.l1_W) + self.l1_b
+    return params
 
-        return x
+
+def forward(params, x):
+    x = jnp.matmul(x, params["l0_W"]) + params["l0_b"]
+    x = jax.nn.gelu(x)
+    x = jnp.matmul(x, params["l1_W"]) + params["l1_b"]
+
+    return x

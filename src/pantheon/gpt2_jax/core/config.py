@@ -4,11 +4,11 @@ from dataclasses import dataclass, asdict
 @dataclass
 class GPT2Config:
     # Core dimensions
-    d_embedding: int = 384
+    d_embedding: int = 5
     d_vocab: int = 50257
 
     # Sequence length
-    context_window: int = 256
+    context_window: int = 5
 
     # Transformer blocks
     num_blocks: int = 12

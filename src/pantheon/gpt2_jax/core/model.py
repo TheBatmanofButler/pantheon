@@ -1,5 +1,3 @@
-from functools import partial
-import equinox as eqx
 import jax
 
 import pantheon.gpt2_jax.core.config as config
@@ -7,53 +5,48 @@ import pantheon.gpt2_jax.core.embed as embed_lib
 import pantheon.gpt2_jax.core.block as block_lib
 
 
-class GPT2(eqx.Module):
-    embed: embed_lib.Embed
-    pos_embed: embed_lib.PositionalEmbedding
-    blocks: list[block_lib.Block]
-    unembed: embed_lib.Unembed
+def init(key):
+    key, embed_key = jax.random.split(key, 2)
+    block_keys = jax.random.split(key, config.gpt2_config.num_blocks)
 
-    def __init__(self, key):
-        key, embed_key = jax.random.split(key, 2)
-        block_keys = jax.random.split(key, config.gpt2_config.num_blocks)
-
-        self.embed = embed_lib.Embed(
+    return {
+        "embed": embed_lib.embed_init(
             key=embed_key,
             d_vocab=config.gpt2_config.d_vocab,
             d_embedding=config.gpt2_config.d_embedding,
             initialized_std_range=config.gpt2_config.initialized_std_range,
-        )
-        self.pos_embed = embed_lib.PositionalEmbedding(
+        ),
+        "pos_embed": embed_lib.pos_embed_init(
             config.gpt2_config.context_window,
             config.gpt2_config.d_embedding,
-        )
-
-        self.blocks = [
-            block_lib.Block(
+        ),
+        "blocks": [
+            block_lib.init(
                 block_keys[i],
-                config.gpt2_config.d_head,
                 config.gpt2_config.d_embedding,
                 config.gpt2_config.d_mlp,
-                config.gpt2_config.context_window,
-                config.gpt2_config.layer_norm_epsilon,
             )
             for i in range(config.gpt2_config.num_blocks)
-        ]
-
-        self.unembed = embed_lib.Unembed(
+        ],
+        "unembed": embed_lib.unembed_init(
             key=embed_key,
             d_vocab=config.gpt2_config.d_vocab,
             d_embedding=config.gpt2_config.d_embedding,
             initialized_std_range=config.gpt2_config.initialized_std_range,
-        )
+        ),
+    }
 
-    def __call__(self, sample):
-        x = sample[0]
 
-        x = jax.vmap(self.embed)(x) + jax.vmap(self.pos_embed)(x)
-        for block in self.blocks:
-            x = block(x)
+def forward(params, sample):
+    x = sample[0]
 
-        x = self.unembed(x)
+    x = jax.vmap(embed_lib.embed_forward, in_axes=(None, 0))(
+        params["embed"], x
+    ) + jax.vmap(embed_lib.pos_embed_forward, in_axes=(None, 0))(params["pos_embed"], x)
 
-        return x
+    for block in params["blocks"]:
+        x = block_lib.forward(block, x, config.gpt2_config.layer_norm_epsilon)
+
+    x = embed_lib.unembed_forward(params["unembed"], x)
+
+    return x

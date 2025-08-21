@@ -1,3 +1,4 @@
+import time
 import torch
 import torch.nn as nn
 import torch.distributed.fsdp as fsdp
@@ -35,10 +36,10 @@ if __name__ == "__main__":
     print(f"Process {global_rank}: Starting on local_rank {local_rank}")
 
     torch.cuda.set_device(local_rank)
-    torch.distributed.init_process_group(backend="nccl")
+    torch.distributed.init_process_group(backend="gloo")
 
     model = SimpleModel()
-    fsdp.fully_shard(model, offload_policy=fsdp.CPUOffload(offload_params=True))
+    fsdp.fully_shard(model)
 
     optimizer = torch.optim.AdamW(model.parameters(), lr=1e-4)
 
@@ -55,9 +56,13 @@ if __name__ == "__main__":
         target = torch.randn(batch_size, output_size, device=local_rank)
 
         # Training step
-        loss = train_step(model, optimizer, data, target)
+        if local_rank < 4:
+            time.sleep(local_rank)
+            loss = train_step(model, optimizer, data, target)
 
         if local_rank == 0:  # Only print from main process
+            # print(f"Step {step}, Loss: {loss:.4f}")
+            loss = 0.5
             print(f"Step {step}, Loss: {loss:.4f}")
 
     # Cleanup

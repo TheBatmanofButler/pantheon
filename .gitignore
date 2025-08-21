@@ -180,3 +180,13 @@ wandb/
 *.pt
 *.pt.trace.json
 profiling_data/
+
+
+# Dataset
+dataset/
+dataset_train/
+dataset_val/
+
+# JAX
+*.arrow
+*.eqx

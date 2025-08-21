@@ -1,74 +1,50 @@
-import equinox as eqx
 import jax
 import jax.numpy as jnp
 
 
-class Embed(eqx.Module):
-    W: jax.Array
+def embed_init(key, d_vocab, d_embedding, initialized_std_range):
+    key, W_key = jax.random.split(key, 2)
 
-    def __init__(self, key, d_vocab, d_embedding, initialized_std_range):
-        key, W_key = jax.random.split(key, 2)
-        self.W = (
-            jax.random.normal(
-                key=W_key,
-                shape=(d_vocab, d_embedding),
-            )
-            * initialized_std_range
+    return (
+        jax.random.normal(
+            key=W_key,
+            shape=(d_vocab, d_embedding),
         )
+        * initialized_std_range
+    )
 
-    def __call__(self, x):
-        return self.W[x]
+
+def embed_forward(params, x):
+    return params["W"][x]
 
 
-class PositionalEmbedding(eqx.Module):
-    embedding: eqx.nn.Embedding
+def pos_embed_init(context_window, d_embedding):
+    positions = jnp.arange(context_window)[:, None]
+    dims = jnp.arange(d_embedding)[None, :]
+    angles = positions / 10000 ** (2 * (dims // 2) / d_embedding)
 
-    def __init__(self, context_window, d_embedding):
-        positions = jnp.arange(context_window)[:, None]
-        dims = jnp.arange(d_embedding)[None, :]
-        angles = positions / 10000 ** (2 * (dims // 2) / d_embedding)
+    return jnp.where(
+        dims % 2 == 0,
+        jnp.sin(angles),
+        jnp.cos(angles),
+    )
 
-        self.embedding = eqx.nn.Embedding(
-            weight=jnp.where(
-                dims % 2 == 0,
-                jnp.sin(angles),
-                jnp.cos(angles),
-            )
+
+def pos_embed_forward(params, x):
+    return params["PositionalEmbedding"][x]
+
+
+def unembed_init(key, d_vocab, d_embedding, initialized_std_range):
+    key, W_key = jax.random.split(key, 2)
+
+    return (
+        jax.random.normal(
+            key=W_key,
+            shape=(d_embedding, d_vocab),
         )
-
-    def __call__(self, x):
-        return self.embedding(x)
-
-
-class Unembed(eqx.Module):
-    W: jax.Array
-
-    def __init__(self, key, d_vocab, d_embedding, initialized_std_range):
-        key, W_key = jax.random.split(key, 2)
-        self.W = (
-            jax.random.normal(
-                key=W_key,
-                shape=(d_embedding, d_vocab),
-            )
-            * initialized_std_range
-        )
-
-    def __call__(self, x):
-        logits = jnp.matmul(x, self.W)
-
-        return logits
+        * initialized_std_range
+    )
 
 
-class TiedUnembed(eqx.Module):
-    W: jax.Array
-
-    def __init__(
-        self,
-        embedding_weight: jax.Array,
-    ):
-        self.W = embedding_weight.T
-
-    def __call__(self, x):
-        logits = jnp.matmul(x, self.W)
-
-        return logits
+def unembed_forward(params, x):
+    return jnp.matmul(x, params["Unembedding"])

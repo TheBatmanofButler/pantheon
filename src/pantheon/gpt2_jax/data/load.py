@@ -13,19 +13,21 @@ def build_dataloaders(config: GPT2Config):
 
     dataset_path = os.path.join(os.getcwd(), "dataset")
 
-    if not os.path.exists(dataset_path):
-        dataset_dict = datasets.load_dataset(
-            config.dataset_path,
-            config.dataset_name,
-            cache_dir=dataset_path,
-        )
-    else:
-        dataset_dict = datasets.load_from_disk(dataset_path)
+    # if not os.path.exists(dataset_path):
+    dataset_dict = datasets.load_dataset(
+        dataset_path,
+        config.dataset_name,
+        # cache_dir=dataset_path,
+    )
+    # else:
+    # dataset_dict = datasets.load_from_disk(
+    #     "/home/ganesh/code/pantheon/src/pantheon/gpt2_jax/dataset/roneneldan___tiny_stories"
+    # )
 
     train_dataset = dataset_dict[datasets.Split.TRAIN]
     val_dataset = dataset_dict[datasets.Split.VALIDATION]
 
-    NUM_TRAIN_SAMPLES = 2**21
+    NUM_TRAIN_SAMPLES = 2**5
     NUM_VAL_SAMPLES = NUM_TRAIN_SAMPLES // 100
     if NUM_VAL_SAMPLES > len(val_dataset):
         raise ValueError(
