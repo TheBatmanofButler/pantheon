@@ -58,11 +58,11 @@ def update_step(params, optimizer_state, batch):
     return params, optimizer_state, loss
 
 
-# wandb.init(
-#     entity=config.gpt2_config.wandb_entity,
-#     project=config.gpt2_config.wandb_project,
-#     config=config.gpt2_config.to_dict(),
-# )
+wandb.init(
+    entity=config.gpt2_config.wandb_entity,
+    project=config.gpt2_config.wandb_project,
+    config=config.gpt2_config.to_dict(),
+)
 
 
 def evaluate(params, sample):
@@ -84,10 +84,10 @@ for batch_idx, batch in enumerate(train_dataloader):
     params, optimizer_state, loss = update_step(params, optimizer_state, batch)
 
     print(f"Batch {step}: Loss = {loss:.4f}")
-    # wandb.log(
-    #     data={"train_loss": loss},
-    #     step=step,
-    # )
+    wandb.log(
+        data={"train_loss": loss},
+        step=step,
+    )
 
     if step % 100 == 0:
         batch_accuracies = jax.vmap(lambda sample: evaluate(params, sample))(
@@ -96,9 +96,10 @@ for batch_idx, batch in enumerate(train_dataloader):
         accuracy = jnp.mean(batch_accuracies)
 
         print(f"Accuracy = {accuracy}")
-        # wandb.log(
-        #     data={"accuracy": accuracy},
-        #     step=step,
-        # )
+        wandb.log(
+            data={"accuracy": accuracy},
+            step=step,
+        )
 
-# save.save_model(params, config.gpt2_config.saved_model_name)
+        print("Saving model")
+        save.save_model(params, config.gpt2_config.saved_model_name)
