@@ -46,7 +46,7 @@ class GPT2Config:
     wandb_entity: str = "the-ganesh-ravichandran-none"
     wandb_project: str = "gpt2-jax"
 
-    saved_model_name: str = "gpt2.eqx"
+    saved_model_name: str = "gpt2-multi.eqx"
 
     def to_dict(self) -> dict:
         """Convert config to dictionary."""

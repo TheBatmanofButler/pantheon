@@ -27,7 +27,7 @@ def build_dataloaders(config: GPT2Config):
     train_dataset = dataset_dict[datasets.Split.TRAIN]
     val_dataset = dataset_dict[datasets.Split.VALIDATION]
 
-    NUM_TRAIN_SAMPLES = 2**5
+    NUM_TRAIN_SAMPLES = 2**21
     NUM_VAL_SAMPLES = NUM_TRAIN_SAMPLES // 100
     if NUM_VAL_SAMPLES > len(val_dataset):
         raise ValueError(
@@ -64,6 +64,8 @@ def build_dataloaders(config: GPT2Config):
     else:
         train_dataset = datasets.load_from_disk(train_dataset_path)
         val_dataset = datasets.load_from_disk(val_dataset_path)
+
+    print("train_dataset size", len(train_dataset))
 
     def collate(batch):
         return jnp.array(
