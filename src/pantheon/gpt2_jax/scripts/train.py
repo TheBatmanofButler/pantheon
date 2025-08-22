@@ -79,6 +79,16 @@ def evaluate(params, sample):
 
 
 for batch_idx, batch in enumerate(train_dataloader):
+    mesh = jax.make_mesh(
+        (config.gpt2_config.num_devices,),
+        axis_names=("batch",),
+    )
+    sharding = jax.NamedSharding(mesh, jax.sharding.PartitionSpec("batch"))
+    replicated_sharding = jax.NamedSharding(mesh, jax.sharding.PartitionSpec())
+
+    batch = jax.device_put(batch, sharding)
+    params = jax.device_put(params, replicated_sharding)
+
     step = batch_idx + 1
 
     params, optimizer_state, loss = update_step(params, optimizer_state, batch)
@@ -103,3 +113,5 @@ for batch_idx, batch in enumerate(train_dataloader):
 
         print("Saving model")
         save.save_model(params, config.gpt2_config.saved_model_name)
+
+wandb.finish()

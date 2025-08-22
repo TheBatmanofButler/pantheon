@@ -22,9 +22,7 @@ class GPT2Config:
     learning_rate: float = 1e-5
 
     # Training
-    num_devices = 4
-    num_sequences_per_batch_per_device: int = 16
-    num_sequences_per_batch: int = num_devices * num_sequences_per_batch_per_device
+    num_sequences_per_batch: int = 16
 
     # Weight initialization
     initialized_std_range: float = 0.02
@@ -33,7 +31,7 @@ class GPT2Config:
     layer_norm_epsilon: float = 1e-5
 
     # Inference
-    temperature: float = 2.0
+    temperature: float = 1.0
 
     # Dataset
     dataset_path: str = "roneneldan/TinyStories"
