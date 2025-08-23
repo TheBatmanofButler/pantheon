@@ -20,6 +20,17 @@ optimizer = optax.chain(
 )
 optimizer_state = optimizer.init(params)
 
+mesh = jax.make_mesh(
+    (config.gpt2_config.num_devices,),
+    axis_names=("batch",),
+)
+
+batch_sharding = jax.NamedSharding(mesh, jax.sharding.PartitionSpec("batch"))
+replicated_sharding = jax.NamedSharding(mesh, jax.sharding.PartitionSpec())
+
+params = jax.device_put(params, replicated_sharding)
+optimizer_state = jax.device_put(optimizer_state, replicated_sharding)
+
 
 def loss_fn(params, sample):
     logits = model_lib.forward(params, sample)
@@ -48,9 +59,23 @@ def param_loss_fn(params, batch):
     return jnp.mean(losses)
 
 
+def compute_loss_and_grads(params, batch):
+    loss, grads = jax.value_and_grad(param_loss_fn)(params, batch)
+
+    loss = jax.lax.pmean(loss, axis_name="batch")
+    grads = jax.lax.pmean(grads, axis_name="batch")
+
+    return loss, grads
+
+
 @jax.jit
 def update_step(params, optimizer_state, batch):
-    loss, grads = jax.value_and_grad(param_loss_fn)(params, batch)
+    loss, grads = jax.shard_map(
+        compute_loss_and_grads,
+        mesh=mesh,
+        in_specs=(replicated_sharding.spec, batch_sharding.spec),
+        out_specs=(replicated_sharding.spec, replicated_sharding.spec),
+    )(params, batch)
 
     updates, optimizer_state = optimizer.update(grads, optimizer_state, params)
     params = optax.apply_updates(params, updates)
@@ -79,15 +104,7 @@ def evaluate(params, sample):
 
 
 for batch_idx, batch in enumerate(train_dataloader):
-    mesh = jax.make_mesh(
-        (config.gpt2_config.num_devices,),
-        axis_names=("batch",),
-    )
-    sharding = jax.NamedSharding(mesh, jax.sharding.PartitionSpec("batch"))
-    replicated_sharding = jax.NamedSharding(mesh, jax.sharding.PartitionSpec())
-
-    batch = jax.device_put(batch, sharding)
-    params = jax.device_put(params, replicated_sharding)
+    batch = jax.device_put(batch, batch_sharding)
 
     step = batch_idx + 1
 
@@ -100,9 +117,19 @@ for batch_idx, batch in enumerate(train_dataloader):
     )
 
     if step % 100 == 0:
-        batch_accuracies = jax.vmap(lambda sample: evaluate(params, sample))(
-            next(iter(test_dataloader))
+        test_batch = next(iter(test_dataloader))
+        test_batch = jax.device_put(test_batch, batch_sharding)
+
+        eval_fn = jax.shard_map(
+            lambda params, batch: jax.vmap(lambda sample: evaluate(params, sample))(
+                batch
+            ),
+            mesh=mesh,
+            in_specs=(replicated_sharding.spec, batch_sharding.spec),
+            out_specs=batch_sharding.spec,
         )
+
+        batch_accuracies = eval_fn(params, test_batch)
         accuracy = jnp.mean(batch_accuracies)
 
         print(f"Accuracy = {accuracy}")
@@ -112,6 +139,7 @@ for batch_idx, batch in enumerate(train_dataloader):
         )
 
         print("Saving model")
-        save.save_model(params, config.gpt2_config.saved_model_name)
+        cpu_params = jax.device_get(params)
+        save.save_model(cpu_params, config.gpt2_config.saved_model_name)
 
 wandb.finish()

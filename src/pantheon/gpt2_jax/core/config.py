@@ -19,7 +19,7 @@ class GPT2Config:
     d_mlp: int = d_embedding * 4
 
     # Optimization
-    learning_rate: float = 1e-5
+    learning_rate: float = 3e-4
 
     # Training
     num_devices = 4

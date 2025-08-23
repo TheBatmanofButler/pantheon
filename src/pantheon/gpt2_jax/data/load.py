@@ -93,7 +93,7 @@ def build_dataloaders(config: GPT2Config):
     ).with_format("torch")
     val_dataloader = torch.utils.data.DataLoader(
         val_dataset,
-        batch_size=2,
+        batch_size=4,
         collate_fn=collate,
     )
 
